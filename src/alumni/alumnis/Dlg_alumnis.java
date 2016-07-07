@@ -6,7 +6,10 @@
 package alumni.alumnis;
 
 import alumni.course_majors.Course_majors;
+import alumni.course_majors.Dlg_course_major;
 import alumni.courses.Courses;
+import alumni.courses.Dlg_courses;
+import alumni.school_levels.Dlg_school_levels;
 import alumni.school_levels.School_levels;
 import alumni.users.MyUser;
 import alumni.utils.Alert;
@@ -236,6 +239,9 @@ public class Dlg_alumnis extends javax.swing.JDialog {
         jTextField11 = new Field.Search();
         jLabel15 = new javax.swing.JLabel();
         jCheckBox5 = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -273,9 +279,9 @@ public class Dlg_alumnis extends javax.swing.JDialog {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alumni/imgs/stpaul.jpg"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel2.setText("ALUMNI REGISTRY");
+        jLabel2.setText("ALUMNI");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("St. Paul University Dumaguete");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -289,8 +295,6 @@ public class Dlg_alumnis extends javax.swing.JDialog {
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("All");
-
-        jYearChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Level:");
@@ -444,34 +448,47 @@ public class Dlg_alumnis extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alumni/imgs/mortarboard (1).png"))); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel6.setText("REGISTRY");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel10.setText("Philippines");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(25, 25, 25))))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25))
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,16 +496,21 @@ public class Dlg_alumnis extends javax.swing.JDialog {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
                         .addComponent(jLabel3)
                         .addGap(1, 1, 1)
-                        .addComponent(jLabel4))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -562,6 +584,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -570,6 +593,8 @@ public class Dlg_alumnis extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -647,6 +672,90 @@ public class Dlg_alumnis extends javax.swing.JDialog {
                 }
             }
         });
+        jTextField8.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_levels();
+                }
+
+            }
+        });
+        jTextField9.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_courses();
+                }
+
+            }
+        });
+        jTextField10.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_majors();
+                }
+
+            }
+        });
+    }
+
+    private void dlg_levels() {
+        Window p = (Window) this;
+        Dlg_school_levels nd = Dlg_school_levels.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_school_levels.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_school_levels.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_courses() {
+        Window p = (Window) this;
+        Dlg_courses nd = Dlg_courses.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_courses.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_courses.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_majors() {
+        Window p = (Window) this;
+        Dlg_course_major nd = Dlg_course_major.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_course_major.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_course_major.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
     // </editor-fold>
 
@@ -660,7 +769,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
         tbl_official_schedule_types.setModel(tbl_official_schedule_types_M);
         tbl_official_schedule_types.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_official_schedule_types.setRowHeight(25);
-        int[] tbl_widths_official_schedule_types = {100, 120, 30, 150, 100, 30, 30};
+        int[] tbl_widths_official_schedule_types = {100, 120, 30, 150, 100, 30, 30, 0};
         for (int i = 0, n = tbl_widths_official_schedule_types.length; i < n; i++) {
             if (i == 2) {
                 continue;
@@ -685,7 +794,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
     public static class Tblofficial_schedule_typesModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "Alumni No", "Student No", "Name", "Level", "Graduated", "", ""
+            "Alumni No", "Student No", "Name", "Level", "Graduated", "", "", ""
         };
 
         public Tblofficial_schedule_typesModel(ListModel listmodel) {
@@ -702,7 +811,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
 
         @Override
         public Class getColumnClass(int col) {
-            if (col == 1000) {
+            if (col == 7) {
                 return Boolean.class;
             }
             return Object.class;
@@ -724,14 +833,44 @@ public class Dlg_alumnis extends javax.swing.JDialog {
                     return " " + tt.graduated_on;
                 case 5:
                     return "/alumni/icons/edit.png";
-                default:
+                case 6:
                     return "/alumni/icons/remove11.png";
+                default:
+                    return tt.selected;
             }
         }
     }
 
     private void ret_official_schedule_types() {
-        String where = "";
+        Field.Combo level = (Field.Combo) jTextField8;
+        Field.Combo course = (Field.Combo) jTextField9;
+        Field.Combo major = (Field.Combo) jTextField10;
+
+        String where = " where motto_in_life like '%" + "" + "%' ";
+        String where2 = " or motto_in_life like '%" + "" + "%' ";
+        if (!jCheckBox1.isSelected()) {
+            where = where + " and graduated_on like '" + jYearChooser1.getValue() + "' ";
+            where2 = where2 + " and graduated_on like '" + jYearChooser1.getValue() + "' ";
+        }
+        if (!jCheckBox3.isSelected()) {
+            where = where + " and level like '" + jTextField8.getText() + "' ";
+            where2 = where2 + " and level like '" + jTextField8.getText() + "' ";
+        }
+        if (!jCheckBox4.isSelected()) {
+            where = where + " and course like '" + jTextField9.getText() + "' ";
+            where2 = where2 + " and course like '" + jTextField9.getText() + "' ";
+        }
+        if (!jCheckBox5.isSelected()) {
+            where = where + " and major like '" + jTextField10.getText() + "' ";
+            where2 = where2 + " and major like '" + jTextField10.getText() + "' ";
+        }
+        String name = jTextField11.getText();
+        where = where + " and concat(lname,space(1),fname) like '%" + name + "%' ";
+        where2 = where2 + " and concat(fname,space(1),lname) like '%" + name + "%' order by lname asc ";
+
+        where = where + where2;
+        
+      
         List< Alumnis.to_alumnis> datas = Alumnis.ret_data(where);
         loadData_official_schedule_types(datas);
         jLabel8.setText("" + datas.size());
@@ -807,7 +946,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
                 String home = System.getProperty("user.home", "");
 
                 String oldfile = home + "\\images_alumni\\default.jpg";
-                String newfile = home + "\\images_alumni\\"+alumni_no + ".jpg";
+                String newfile = home + "\\images_alumni\\" + alumni_no + ".jpg";
 
                 File source = new File(oldfile);
                 System.out.println("Source: " + oldfile);
@@ -833,6 +972,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
                 String cellphone_no = data.cellphone_no;
                 String graduated_in = data.graduated_in;
                 String graduated_on = data.graduated_on;
+                String level = data.level;
                 String course = data.course;
                 String major = data.major;
                 String motto_in_life = data.motto_in_life;
@@ -848,7 +988,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
                 List<Alumni_school_activities.to_alumni_school_activities> activities = data.activities;
                 List<Alumni_family_members.to_alumni_family_members> members = data.members;
 
-                Alumnis.to_alumnis alumni = new Alumnis.to_alumnis(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no, fname, mi, lname, sname, gender, civil_status, bday, landline_no, email_address, cellphone_no, graduated_in, graduated_on, course, major, motto_in_life, password, father_name, father_is_alumni, father_occupation, father_office_address, mother_name, mother_is_alumni, mother_occupation, mother_office_address);
+                Alumnis.to_alumnis alumni = new Alumnis.to_alumnis(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no, fname, mi, lname, sname, gender, civil_status, bday, landline_no, email_address, cellphone_no, graduated_in, graduated_on, level, course, major, motto_in_life, password, father_name, father_is_alumni, father_occupation, father_office_address, mother_name, mother_is_alumni, mother_occupation, mother_office_address, true);
                 Alumnis.add_data(alumni, activities, members);
                 ret_official_schedule_types();
                 Alert.set(1, "");
@@ -915,6 +1055,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
                     String cellphone_no = data.cellphone_no;
                     String graduated_in = data.graduated_in;
                     String graduated_on = data.graduated_on;
+                    String level = data.level;
                     String course = data.course;
                     String major = data.major;
                     String motto_in_life = data.motto_in_life;
@@ -928,7 +1069,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
                     String mother_occupation = data.mother_occupation;
                     String mother_office_address = data.mother_office_address;
 
-                    Alumnis.to_alumnis alumni = new Alumnis.to_alumnis(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no, fname, mi, lname, sname, gender, civil_status, bday, landline_no, email_address, cellphone_no, graduated_in, graduated_on, course, major, motto_in_life, password, father_name, father_is_alumni, father_occupation, father_office_address, mother_name, mother_is_alumni, mother_occupation, mother_office_address);
+                    Alumnis.to_alumnis alumni = new Alumnis.to_alumnis(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no, fname, mi, lname, sname, gender, civil_status, bday, landline_no, email_address, cellphone_no, graduated_in, graduated_on, level, course, major, motto_in_life, password, father_name, father_is_alumni, father_occupation, father_office_address, mother_name, mother_is_alumni, mother_occupation, mother_office_address, true);
                     Alumnis.update_data(alumni);
                     ret_official_schedule_types();
                     tbl_official_schedule_types.clearSelection();
@@ -944,7 +1085,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
 
     private void init_levels() {
         String where = "";
-        List<School_levels.to_school_levels> levels = School_levels.ret_data(where);
+        final List<School_levels.to_school_levels> levels = School_levels.ret_data(where);
 
         Object[][] obj = new Object[levels.size()][1];
         int i = 0;
@@ -968,7 +1109,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
 
     private void init_courses() {
         String where = "";
-        List<Courses.to_courses> levels = Courses.ret_data(where);
+        final List<Courses.to_courses> levels = Courses.ret_data(where);
 
         Object[][] obj = new Object[levels.size()][1];
         int i = 0;
@@ -992,7 +1133,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
 
     private void init_course_majors() {
         String where = "";
-        List<Course_majors.to_course_majors> levels = Course_majors.ret_data(where);
+       final  List<Course_majors.to_course_majors> levels = Course_majors.ret_data(where);
 
         Object[][] obj = new Object[levels.size()][1];
         int i = 0;

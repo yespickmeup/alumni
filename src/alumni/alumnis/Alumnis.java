@@ -46,6 +46,8 @@ public class Alumnis {
         public final String cellphone_no;
         public final String graduated_in;
         public final String graduated_on;
+        public final String level;
+
         public final String course;
         public final String major;
         public final String motto_in_life;
@@ -58,8 +60,9 @@ public class Alumnis {
         public final String mother_is_alumni;
         public final String mother_occupation;
         public final String mother_office_address;
+        public boolean selected;
 
-        public to_alumnis(int id, String created_at, String updated_at, String created_by, String updated_by, int status, int upload_status, String alumni_no, String student_no, String fname, String mi, String lname, String sname, int gender, String civil_status, String bday, String landline_no, String email_address, String cellphone_no, String graduated_in, String graduated_on, String course, String major, String motto_in_life, String password, String father_name, int father_is_alumni, String father_occupation, String father_office_address, String mother_name, String mother_is_alumni, String mother_occupation, String mother_office_address) {
+        public to_alumnis(int id, String created_at, String updated_at, String created_by, String updated_by, int status, int upload_status, String alumni_no, String student_no, String fname, String mi, String lname, String sname, int gender, String civil_status, String bday, String landline_no, String email_address, String cellphone_no, String graduated_in, String graduated_on, String level, String course, String major, String motto_in_life, String password, String father_name, int father_is_alumni, String father_occupation, String father_office_address, String mother_name, String mother_is_alumni, String mother_occupation, String mother_office_address, boolean selected) {
             this.id = id;
             this.created_at = created_at;
             this.updated_at = updated_at;
@@ -81,6 +84,7 @@ public class Alumnis {
             this.cellphone_no = cellphone_no;
             this.graduated_in = graduated_in;
             this.graduated_on = graduated_on;
+            this.level = level;
             this.course = course;
             this.major = major;
             this.motto_in_life = motto_in_life;
@@ -93,7 +97,17 @@ public class Alumnis {
             this.mother_is_alumni = mother_is_alumni;
             this.mother_occupation = mother_occupation;
             this.mother_office_address = mother_office_address;
+            this.selected = selected;
         }
+
+        public boolean isSelected() {
+            return selected;
+        }
+
+        public void setSelected(boolean selected) {
+            this.selected = selected;
+        }
+
     }
 
     public static void add_data(to_alumnis to_alumnis, List<Alumni_school_activities.to_alumni_school_activities> activities1, List<Alumni_family_members.to_alumni_family_members> members1) {
@@ -121,6 +135,7 @@ public class Alumnis {
                     + ",cellphone_no"
                     + ",graduated_in"
                     + ",graduated_on"
+                    + ",level"
                     + ",course"
                     + ",major"
                     + ",motto_in_life"
@@ -154,6 +169,7 @@ public class Alumnis {
                     + ",:cellphone_no"
                     + ",:graduated_in"
                     + ",:graduated_on"
+                    + ",:level"
                     + ",:course"
                     + ",:major"
                     + ",:motto_in_life"
@@ -189,6 +205,7 @@ public class Alumnis {
                     .setString("cellphone_no", to_alumnis.cellphone_no)
                     .setString("graduated_in", to_alumnis.graduated_in)
                     .setString("graduated_on", to_alumnis.graduated_on)
+                    .setString("level", to_alumnis.level)
                     .setString("course", to_alumnis.course)
                     .setString("major", to_alumnis.major)
                     .setString("motto_in_life", to_alumnis.motto_in_life)
@@ -310,6 +327,7 @@ public class Alumnis {
     public static void update_data(to_alumnis to_alumnis) {
         try {
             Connection conn = MyConnection.connect();
+            conn.setAutoCommit(false);
             String s0 = "update alumnis set "
                     + "created_at= :created_at "
                     + ",updated_at= :updated_at "
@@ -331,6 +349,7 @@ public class Alumnis {
                     + ",cellphone_no= :cellphone_no "
                     + ",graduated_in= :graduated_in "
                     + ",graduated_on= :graduated_on "
+                    + ",level= :level"
                     + ",course= :course "
                     + ",major= :major "
                     + ",motto_in_life= :motto_in_life "
@@ -367,6 +386,7 @@ public class Alumnis {
                     .setString("cellphone_no", to_alumnis.cellphone_no)
                     .setString("graduated_in", to_alumnis.graduated_in)
                     .setString("graduated_on", to_alumnis.graduated_on)
+                    .setString("level", to_alumnis.level)
                     .setString("course", to_alumnis.course)
                     .setString("major", to_alumnis.major)
                     .setString("motto_in_life", to_alumnis.motto_in_life)
@@ -501,6 +521,7 @@ public class Alumnis {
                     + ",mother_is_alumni"
                     + ",mother_occupation"
                     + ",mother_office_address"
+                    + ",level"
                     + " from alumnis"
                     + " " + where;
 
@@ -540,8 +561,8 @@ public class Alumnis {
                 String mother_is_alumni = rs.getString(31);
                 String mother_occupation = rs.getString(32);
                 String mother_office_address = rs.getString(33);
-
-                to_alumnis to = new to_alumnis(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no, fname, mi, lname, sname, gender, civil_status, bday, landline_no, email_address, cellphone_no, graduated_in, graduated_on, course, major, motto_in_life, password, father_name, father_is_alumni, father_occupation, father_office_address, mother_name, mother_is_alumni, mother_occupation, mother_office_address);
+                String level = rs.getString(34);
+                to_alumnis to = new to_alumnis(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no, fname, mi, lname, sname, gender, civil_status, bday, landline_no, email_address, cellphone_no, graduated_in, graduated_on, level, course, major, motto_in_life, password, father_name, father_is_alumni, father_occupation, father_office_address, mother_name, mother_is_alumni, mother_occupation, mother_office_address, true);
                 datas.add(to);
             }
             return datas;

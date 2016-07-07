@@ -5,11 +5,16 @@
  */
 package alumni.alumnis;
 
+import alumni.alumni_generated_cards.Alumni_generated_cards;
+import alumni.alumni_generated_cards.Alumni_generated_cards.to_alumni_generated_cards;
 import alumni.alumnis.Alumni_family_members.to_alumni_family_members;
 import alumni.alumnis.Alumni_school_activities.to_alumni_school_activities;
 import alumni.course_majors.Course_majors;
+import alumni.course_majors.Dlg_course_major;
 import alumni.courses.Courses;
+import alumni.courses.Dlg_courses;
 import alumni.family_relations.Family_relations;
+import alumni.school_levels.Dlg_school_levels;
 import alumni.school_levels.School_levels;
 import alumni.users.MyUser;
 import alumni.utils.Alert;
@@ -26,6 +31,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -92,6 +98,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
         public final String cellphone_no;
         public final String graduated_in;
         public final String graduated_on;
+        public final String level;
         public final String course;
         public final String major;
         public final String motto_in_life;
@@ -107,7 +114,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
         public final List<Alumni_school_activities.to_alumni_school_activities> activities;
         public final List<Alumni_family_members.to_alumni_family_members> members;
 
-        public OutputData(String alumni_no, String student_no, String fname, String mi, String lname, String sname, int gender, String civil_status, String bday, String landline_no, String email_address, String cellphone_no, String graduated_in, String graduated_on, String course, String major, String motto_in_life, String password, String father_name, int father_is_alumni, String father_occupation, String father_office_address, String mother_name, String mother_is_alumni, String mother_occupation, String mother_office_address, List<Alumni_school_activities.to_alumni_school_activities> activities, List<Alumni_family_members.to_alumni_family_members> members) {
+        public OutputData(String alumni_no, String student_no, String fname, String mi, String lname, String sname, int gender, String civil_status, String bday, String landline_no, String email_address, String cellphone_no, String graduated_in, String graduated_on, String level, String course, String major, String motto_in_life, String password, String father_name, int father_is_alumni, String father_occupation, String father_office_address, String mother_name, String mother_is_alumni, String mother_occupation, String mother_office_address, List<Alumni_school_activities.to_alumni_school_activities> activities, List<Alumni_family_members.to_alumni_family_members> members) {
             this.alumni_no = alumni_no;
             this.student_no = student_no;
             this.fname = fname;
@@ -122,6 +129,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
             this.cellphone_no = cellphone_no;
             this.graduated_in = graduated_in;
             this.graduated_on = graduated_on;
+            this.level = level;
             this.course = course;
             this.major = major;
             this.motto_in_life = motto_in_life;
@@ -364,6 +372,14 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
         jTextField29 = new Field.Input();
         jLabel37 = new javax.swing.JLabel();
         jTextField30 = new Field.Input();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbl_alumni_generated_cards = new javax.swing.JTable();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jProgressBar3 = new javax.swing.JProgressBar();
+        jButton8 = new Button.Info();
         jButton6 = new Button.Success();
         jButton7 = new Button.Default();
 
@@ -610,8 +626,6 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Year:");
-
-        jYearChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Course:");
@@ -1312,6 +1326,82 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Alumni Family Members", jPanel4);
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        tbl_alumni_generated_cards.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tbl_alumni_generated_cards.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_alumni_generated_cardsMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tbl_alumni_generated_cards);
+
+        jLabel38.setText("No. of Rows:");
+
+        jLabel39.setText("0");
+
+        jLabel40.setText("Status:");
+
+        jProgressBar3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jProgressBar3.setString("");
+        jProgressBar3.setStringPainted(true);
+
+        jButton8.setText("Print New Card");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jLabel38)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel40)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(179, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel38)
+                        .addComponent(jLabel39)))
+                .addGap(90, 90, 90))
+        );
+
+        jTabbedPane1.addTab("ID Card Generated", jPanel5);
+
         jButton6.setText("Ok");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1626,6 +1716,14 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
         select_alumni_family_members();
     }//GEN-LAST:event_tbl_alumni_family_membersMouseClicked
 
+    private void tbl_alumni_generated_cardsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_alumni_generated_cardsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_alumni_generated_cardsMouseClicked
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        save_alumni_generated_cards();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1638,6 +1736,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -1672,7 +1771,10 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1684,10 +1786,13 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
+    private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
@@ -1721,12 +1826,14 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField9;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JTable tbl_alumni_family_members;
+    private javax.swing.JTable tbl_alumni_generated_cards;
     private javax.swing.JTable tbl_alumni_school_activities;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
         init_tbl_alumni_school_activities(tbl_alumni_school_activities);
         init_tbl_alumni_family_members(tbl_alumni_family_members);
+        init_tbl_alumni_generated_cards(tbl_alumni_generated_cards);
         try {
             webcams = Webcam.getWebcams();
         } catch (Exception e) {
@@ -1734,10 +1841,10 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
         }
     }
 
-    Alumnis.to_alumnis my_alumni = new Alumnis.to_alumnis(0, "", "", "", "", 0, 0, "", "", "", "", "", "", 0, "", "", "", "", "", "", "", "", "", "", "", "", 0, "", "", "", "", "", "");
+    Alumnis.to_alumnis my_alumni = new Alumnis.to_alumnis(0, "", "", "", "", 0, 0, "", "", "", "", "", "", 0, "", "", "", "", "", "", "", "", "", "", "", "", "", 0, "", "", "", "", "", "", true);
 
     public void do_pass_new() {
-        my_alumni = new Alumnis.to_alumnis(0, "", "", "", "", 0, 0, "", "", "", "", "", "", 0, "", "", "", "", "", "", "", "", "", "", "", "", 0, "", "", "", "", "", "");
+        my_alumni = new Alumnis.to_alumnis(0, "", "", "", "", 0, 0, "", "", "", "", "", "", 0, "", "", "", "", "", "", "", "", "", "", "", "", "", 0, "", "", "", "", "", "", true);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -1820,6 +1927,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
             public void run() {
                 ret_alumni_school_activities();
                 ret_alumni_family_members();
+                ret_alumni_generated_cards();
                 jTextField11.grabFocus();
             }
         });
@@ -1841,6 +1949,91 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
                 disposed();
             }
         });
+
+        jTextField12.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_levels();
+                }
+
+            }
+        });
+        jTextField13.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_courses();
+                }
+
+            }
+        });
+        jTextField14.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_F5) {
+                    dlg_majors();
+                }
+
+            }
+        });
+
+    }
+
+    private void dlg_levels() {
+        Window p = (Window) this;
+        Dlg_school_levels nd = Dlg_school_levels.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_school_levels.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_school_levels.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_courses() {
+        Window p = (Window) this;
+        Dlg_courses nd = Dlg_courses.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_courses.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_courses.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
+    }
+
+    private void dlg_majors() {
+        Window p = (Window) this;
+        Dlg_course_major nd = Dlg_course_major.create(p, true);
+        nd.setTitle("");
+
+        nd.setCallback(new Dlg_course_major.Callback() {
+
+            @Override
+            public void ok(CloseDialog closeDialog, Dlg_course_major.OutputData data) {
+                closeDialog.ok();
+
+            }
+        });
+        nd.setLocationRelativeTo(this);
+        nd.setVisible(true);
     }
     // </editor-fold>
 
@@ -1932,7 +2125,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void ret_alumni_school_activities() {
         String where = " where alumni_no='" + my_alumni.alumni_no + "' ";
-        System.out.println(where);
+      
         List<to_alumni_school_activities> datas = Alumni_school_activities.ret_data(where);
         loadData_alumni_school_activities(datas);
         jLabel28.setText("" + datas.size());
@@ -2329,15 +2522,16 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
         String mother_office_address = jTextField21.getText();
         List<Alumni_school_activities.to_alumni_school_activities> activities = tbl_alumni_school_activities_ALM;
         List<Alumni_family_members.to_alumni_family_members> members = tbl_alumni_family_members_ALM;
+        String level = jTextField12.getText();
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(alumni_no, student_no, fname, mi, lname, sname, gender, civil_status, bday, landline_no, email_address, cellphone_no, graduated_in, graduated_on, course, major, motto_in_life, password, father_name, father_is_alumni, father_occupation, father_office_address, mother_name, mother_is_alumni, mother_occupation, mother_office_address, activities, members));
+            callback.ok(new CloseDialog(this), new OutputData(alumni_no, student_no, fname, mi, lname, sname, gender, civil_status, bday, landline_no, email_address, cellphone_no, graduated_in, graduated_on, level, course, major, motto_in_life, password, father_name, father_is_alumni, father_occupation, father_office_address, mother_name, mother_is_alumni, mother_occupation, mother_office_address, activities, members));
 
         }
     }
 
     private void init_levels() {
         String where = "";
-        List<School_levels.to_school_levels> levels = School_levels.ret_data(where);
+        final List<School_levels.to_school_levels> levels = School_levels.ret_data(where);
 
         Object[][] obj = new Object[levels.size()][1];
         int i = 0;
@@ -2361,7 +2555,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void init_courses() {
         String where = "";
-        List<Courses.to_courses> levels = Courses.ret_data(where);
+        final List<Courses.to_courses> levels = Courses.ret_data(where);
 
         Object[][] obj = new Object[levels.size()][1];
         int i = 0;
@@ -2385,7 +2579,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void init_course_majors() {
         String where = "";
-        List<Course_majors.to_course_majors> levels = Course_majors.ret_data(where);
+        final List<Course_majors.to_course_majors> levels = Course_majors.ret_data(where);
 
         Object[][] obj = new Object[levels.size()][1];
         int i = 0;
@@ -2409,7 +2603,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void init_suffixes() {
 
-        List<String> levels = new ArrayList();
+       final  List<String> levels = new ArrayList();
         levels.add("Jr.");
         levels.add("Sr.");
         levels.add("I");
@@ -2438,7 +2632,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void init_gender() {
 
-        List<String> levels = new ArrayList();
+       final List<String> levels = new ArrayList();
         levels.add("Male");
         levels.add("Female");
 
@@ -2464,7 +2658,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void init_civil_status() {
 
-        List<String> levels = new ArrayList();
+       final List<String> levels = new ArrayList();
         levels.add("Single");
         levels.add("Married");
         levels.add("Annulled");
@@ -2493,7 +2687,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
     private void init_relations() {
         String where = "";
 
-        List<Family_relations.to_family_relations> levels = Family_relations.ret_data(where);
+        final List<Family_relations.to_family_relations> levels = Family_relations.ret_data(where);
 
         Object[][] obj = new Object[levels.size()][1];
         int i = 0;
@@ -2559,7 +2753,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
                     webcam.close();
                 }
                 path = path + "\\" + picture_name + ".jpg";
-                File f = new File(path);
+                final File f = new File(path);
                 final String ff = path;
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
@@ -2605,4 +2799,119 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
         //</editor-fold>
 
     }
+
+    //<editor-fold defaultstate="collapsed" desc=" alumni_generated_cards "> 
+    public static ArrayListModel tbl_alumni_generated_cards_ALM;
+    public static Tblalumni_generated_cardsModel tbl_alumni_generated_cards_M;
+
+    public static void init_tbl_alumni_generated_cards(JTable tbl_alumni_generated_cards) {
+        tbl_alumni_generated_cards_ALM = new ArrayListModel();
+        tbl_alumni_generated_cards_M = new Tblalumni_generated_cardsModel(tbl_alumni_generated_cards_ALM);
+        tbl_alumni_generated_cards.setModel(tbl_alumni_generated_cards_M);
+        tbl_alumni_generated_cards.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_alumni_generated_cards.setRowHeight(25);
+        int[] tbl_widths_alumni_generated_cards = {100, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_alumni_generated_cards.length; i < n; i++) {
+            if (i == 0) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_alumni_generated_cards, i, tbl_widths_alumni_generated_cards[i]);
+        }
+        Dimension d = tbl_alumni_generated_cards.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_alumni_generated_cards.getTableHeader().setPreferredSize(d);
+        tbl_alumni_generated_cards.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_alumni_generated_cards.setRowHeight(25);
+        tbl_alumni_generated_cards.setFont(new java.awt.Font("Arial", 0, 12));
+    }
+
+    public static void loadData_alumni_generated_cards(List<to_alumni_generated_cards> acc) {
+        tbl_alumni_generated_cards_ALM.clear();
+        tbl_alumni_generated_cards_ALM.addAll(acc);
+    }
+
+    public static class Tblalumni_generated_cardsModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Date", "created_at", "updated_at", "created_by", "updated_by", "status", "upload_status", "alumni_no", "student_no"
+        };
+
+        public Tblalumni_generated_cardsModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_alumni_generated_cards tt = (to_alumni_generated_cards) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + DateType.convert_slash_datetime3(tt.created_at);
+                case 1:
+                    return tt.created_at;
+                case 2:
+                    return tt.updated_at;
+                case 3:
+                    return tt.created_by;
+                case 4:
+                    return tt.updated_by;
+                case 5:
+                    return tt.status;
+                case 6:
+                    return tt.upload_status;
+                case 7:
+                    return tt.alumni_no;
+                default:
+                    return tt.student_no;
+            }
+        }
+    }
+
+    private void ret_alumni_generated_cards() {
+        String where = " where alumni_no = '" + my_alumni.alumni_no + "' order by created_at asc ";
+        List<to_alumni_generated_cards> datas = Alumni_generated_cards.ret_data(where);
+        loadData_alumni_generated_cards(datas);
+        jLabel39.setText("" + datas.size());
+    }
+
+    private void save_alumni_generated_cards() {
+        if (my_alumni.id != 0) {
+            int id = 0;
+            String created_at = DateType.now();
+            String updated_at = DateType.now();
+            String created_by = MyUser.getUser_id();
+            String updated_by = MyUser.getUser_id();
+            int status = 1;
+            int upload_status = 0;
+            String alumni_no = my_alumni.alumni_no;
+            String student_no = my_alumni.student_no;
+            Alumni_generated_cards.to_alumni_generated_cards card = new to_alumni_generated_cards(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no);
+            try {
+                Thread.sleep(2000);
+                Alumni_generated_cards.add_data(card);
+                Alert.set(1, "");
+                ret_alumni_generated_cards();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Dlg_alumni_new.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+//</editor-fold> 
+
 }

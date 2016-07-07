@@ -136,3 +136,19 @@ id int auto_increment primary key
 ,occupation varchar(255)
 ,office_address varchar(255)
 );
+
+alter table alumnis add level varchar(255) after graduated_on;
+
+
+drop table if exists alumni_generated_cards;
+create table alumni_generated_cards(
+id int auto_increment primary key
+,created_at datetime
+,updated_at datetime
+,created_by varchar(255)
+,updated_by varchar(255)
+,status int
+,upload_status int
+,alumni_no varchar(255)
+,student_no varchar(255)
+);

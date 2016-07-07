@@ -574,7 +574,7 @@ public class Dlg_family_relations extends javax.swing.JDialog {
             return;
         }
         int col = tbl_official_schedule_types.getSelectedColumn();
-        Family_relations.to_family_relations to = (Family_relations.to_family_relations) tbl_official_schedule_types_ALM.get(row);
+       final Family_relations.to_family_relations to = (Family_relations.to_family_relations) tbl_official_schedule_types_ALM.get(row);
         if (col == 1) {
             jTextField1.setText(to.relation);
         }
