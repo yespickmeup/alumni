@@ -5,6 +5,7 @@
  */
 package alumni.alumnis;
 
+import alumni.utils.DateType;
 import alumni.utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.ReceiptIncrementor;
@@ -574,7 +576,9 @@ public class Alumnis {
     }
 
     public static String increment_id() {
-        String id = "000000000000";
+        String year = DateType.y.format(new Date());
+
+        String id = year + "000000";
         try {
             Connection conn = MyConnection.connect();
             String s0 = "select max(id) from alumnis";
@@ -590,7 +594,7 @@ public class Alumnis {
                 }
             }
             if (id == null) {
-                id = "000000000000";
+                id = year + "000000";
             }
             id = ReceiptIncrementor.increment(id);
             return id;

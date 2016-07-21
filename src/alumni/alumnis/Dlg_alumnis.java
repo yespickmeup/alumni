@@ -296,6 +296,8 @@ public class Dlg_alumnis extends javax.swing.JDialog {
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("All");
 
+        jYearChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Level:");
 

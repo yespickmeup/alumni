@@ -14,6 +14,9 @@ import alumni.course_majors.Dlg_course_major;
 import alumni.courses.Courses;
 import alumni.courses.Dlg_courses;
 import alumni.family_relations.Family_relations;
+import alumni.reports.Srpt_card_front;
+import static alumni.reports.Srpt_card_front.get_viewer;
+import alumni.reports.Srpt_cart_back;
 import alumni.school_levels.Dlg_school_levels;
 import alumni.school_levels.School_levels;
 import alumni.users.MyUser;
@@ -35,6 +38,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,16 +47,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import mijzcx.synapse.desk.utils.Application;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.FitIn;
+import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 import synsoftech.util.ImageRenderer1;
@@ -1936,6 +1951,10 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     // <editor-fold defaultstate="collapsed" desc="Key">
     private void disposed() {
+        for (int i = 0; i < webcams.size(); i++) {
+            Webcam webcam = webcams.get(i);
+            webcam.close();
+        }
         this.dispose();
     }
 
@@ -2125,7 +2144,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void ret_alumni_school_activities() {
         String where = " where alumni_no='" + my_alumni.alumni_no + "' ";
-      
+
         List<to_alumni_school_activities> datas = Alumni_school_activities.ret_data(where);
         loadData_alumni_school_activities(datas);
         jLabel28.setText("" + datas.size());
@@ -2523,6 +2542,10 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
         List<Alumni_school_activities.to_alumni_school_activities> activities = tbl_alumni_school_activities_ALM;
         List<Alumni_family_members.to_alumni_family_members> members = tbl_alumni_family_members_ALM;
         String level = jTextField12.getText();
+        for (int i = 0; i < webcams.size(); i++) {
+            Webcam webcam = webcams.get(i);
+            webcam.close();
+        }
         if (callback != null) {
             callback.ok(new CloseDialog(this), new OutputData(alumni_no, student_no, fname, mi, lname, sname, gender, civil_status, bday, landline_no, email_address, cellphone_no, graduated_in, graduated_on, level, course, major, motto_in_life, password, father_name, father_is_alumni, father_occupation, father_office_address, mother_name, mother_is_alumni, mother_occupation, mother_office_address, activities, members));
 
@@ -2603,7 +2626,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void init_suffixes() {
 
-       final  List<String> levels = new ArrayList();
+        final List<String> levels = new ArrayList();
         levels.add("Jr.");
         levels.add("Sr.");
         levels.add("I");
@@ -2632,7 +2655,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void init_gender() {
 
-       final List<String> levels = new ArrayList();
+        final List<String> levels = new ArrayList();
         levels.add("Male");
         levels.add("Female");
 
@@ -2658,7 +2681,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void init_civil_status() {
 
-       final List<String> levels = new ArrayList();
+        final List<String> levels = new ArrayList();
         levels.add("Single");
         levels.add("Married");
         levels.add("Annulled");
@@ -2891,27 +2914,87 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
     private void save_alumni_generated_cards() {
         if (my_alumni.id != 0) {
-            int id = 0;
-            String created_at = DateType.now();
-            String updated_at = DateType.now();
-            String created_by = MyUser.getUser_id();
-            String updated_by = MyUser.getUser_id();
-            int status = 1;
-            int upload_status = 0;
-            String alumni_no = my_alumni.alumni_no;
-            String student_no = my_alumni.student_no;
-            Alumni_generated_cards.to_alumni_generated_cards card = new to_alumni_generated_cards(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no);
-            try {
-                Thread.sleep(2000);
-                Alumni_generated_cards.add_data(card);
-                Alert.set(1, "");
-                ret_alumni_generated_cards();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Dlg_alumni_new.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+            Window p = (Window) this;
+            Dlg_print_id nd = Dlg_print_id.create(p, true);
+            nd.setTitle("");
+
+            nd.setCallback(new Dlg_print_id.Callback() {
+                @Override
+                public void front(CloseDialog closeDialog, Dlg_print_id.OutputData data) {
+                    String home = System.getProperty("user.home");
+                    String background_path = home + "images_alumni\\template\\default_front.jpg";
+                    String photo_path = home + "images_alumni\\" + my_alumni.alumni_no + ".jpg";
+                    String id_no = my_alumni.alumni_no;
+                    String name = my_alumni.fname + " " + my_alumni.mi + " " + my_alumni.lname;
+                    String signature_path = "";
+                    Srpt_card_front rpt = new Srpt_card_front(background_path, photo_path, id_no, name, signature_path);
+                    String jrxml = "rpt_card_front.jrxml";
+                    InputStream is = Srpt_card_front.class.getResourceAsStream(jrxml);
+
+                    try {
+
+                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
+                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                                setParameter(rpt), JasperUtil.emptyDatasource());
+
+                        if (jasperPrint != null) {
+                            JasperPrintManager.printReport(jasperPrint, false);
+                        }
+                    } catch (JRException ex) {
+                        Logger.getLogger(Srpt_card_front.class.getName()).
+                                log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                @Override
+                public void back(CloseDialog closeDialog, Dlg_print_id.OutputData data) {
+                    closeDialog.ok();
+
+                    String fathers_name = my_alumni.father_name;
+                    String contact_no = "";
+                    String address = my_alumni.father_office_address;
+
+                    Srpt_cart_back rpt = new Srpt_cart_back(fathers_name, contact_no, address);
+
+                    String jrxml = "rpt_card_back.jrxml";
+                    InputStream is = Srpt_cart_back.class.getResourceAsStream(jrxml);
+                    
+                    try {
+
+                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
+                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                                setParameter(rpt), JasperUtil.emptyDatasource());
+
+                        if (jasperPrint != null) {
+                            JasperPrintManager.printReport(jasperPrint, false);
+                        }
+                    } catch (JRException ex) {
+                        Logger.getLogger(Srpt_cart_back.class.getName()).
+                                log(Level.SEVERE, null, ex);
+                    }
+
+                    int id = 0;
+                    String created_at = DateType.now();
+                    String updated_at = DateType.now();
+                    String created_by = MyUser.getUser_id();
+                    String updated_by = MyUser.getUser_id();
+                    int status = 1;
+                    int upload_status = 0;
+                    String alumni_no = my_alumni.alumni_no;
+                    String student_no = my_alumni.student_no;
+                    Alumni_generated_cards.to_alumni_generated_cards card = new to_alumni_generated_cards(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no);
+                    Alumni_generated_cards.add_data(card);
+                    Alert.set(1, "");
+                    ret_alumni_generated_cards();
+                }
+
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
 
         }
     }
-//</editor-fold> 
 
+//</editor-fold> 
 }
