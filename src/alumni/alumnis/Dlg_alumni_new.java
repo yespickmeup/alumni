@@ -2939,7 +2939,8 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
                                 setParameter(rpt), JasperUtil.emptyDatasource());
 
                         if (jasperPrint != null) {
-                            JasperPrintManager.printReport(jasperPrint, false);
+                            JasperPrintManager.printPages(jasperPrint, 0, 0, false);
+
                         }
                     } catch (JRException ex) {
                         Logger.getLogger(Srpt_card_front.class.getName()).
@@ -2959,7 +2960,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
                     String jrxml = "rpt_card_back.jrxml";
                     InputStream is = Srpt_cart_back.class.getResourceAsStream(jrxml);
-                    
+
                     try {
 
                         JasperReport jasperReport = JasperCompileManager.compileReport(is);
@@ -2967,7 +2968,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
                                 setParameter(rpt), JasperUtil.emptyDatasource());
 
                         if (jasperPrint != null) {
-                            JasperPrintManager.printReport(jasperPrint, false);
+                            JasperPrintManager.printPages(jasperPrint, 0, 0, false);
                         }
                     } catch (JRException ex) {
                         Logger.getLogger(Srpt_cart_back.class.getName()).

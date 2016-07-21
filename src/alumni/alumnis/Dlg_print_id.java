@@ -181,8 +181,8 @@ public class Dlg_print_id extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton8 = new Button.Default();
-        jButton9 = new Button.Default();
+        jButton8 = new Button.Info();
+        jButton9 = new Button.Info();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -197,7 +197,6 @@ public class Dlg_print_id extends javax.swing.JDialog {
         });
 
         jButton9.setText("Back");
-        jButton9.setEnabled(false);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -258,12 +257,7 @@ public class Dlg_print_id extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                jButton9.setEnabled(false);
-            }
-        });
+       
     }
     
     public void do_pass() {
@@ -289,13 +283,7 @@ public class Dlg_print_id extends javax.swing.JDialog {
 
     // </editor-fold>
     private void front() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                jButton9.setEnabled(false);
-                jButton9.setEnabled(true);
-            }
-        });
+       
         if (callback != null) {
             callback.front(new CloseDialog(this), new OutputData());
         }
