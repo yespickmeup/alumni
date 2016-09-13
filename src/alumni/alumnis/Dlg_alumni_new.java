@@ -1925,7 +1925,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
         }
 
         String home = System.getProperty("user.home", "");
-        String path = home + "\\images_alumni\\" + alumni.alumni_no + ".jpg";
+        String path = "C:\\Users\\Guinness\\images_alumni\\" + alumni.alumni_no + ".jpg";
         File f = new File(path);
         if (f.exists()) {
             ImageIcon icon = new ImageIcon(path);
@@ -2740,10 +2740,8 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
 
         //<editor-fold defaultstate="collapsed" desc=" camera ">
         if (jButton1.getText().equalsIgnoreCase("Capture")) {
-            String home = System.getProperty("user.home", "C:\\Users\\Guinness");
-//            String home = "C:\\Users\\Guinness\\Desktop";
-
-            String path = home + "\\images_alumni";
+            String home = System.getProperty("user.home", "");
+            String path =  "C:\\Users\\Guinness\\images_alumni";
             File files = new File(path);
             if (files.exists()) {
                 if (files.mkdirs()) {
@@ -2923,15 +2921,16 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
                 @Override
                 public void front(CloseDialog closeDialog, Dlg_print_id.OutputData data) {
                     String home = System.getProperty("user.home");
-                    String background_path = home + "images_alumni\\template\\default_front.jpg";
-                    String photo_path = home + "images_alumni\\" + my_alumni.alumni_no + ".jpg";
+                    String background_path = "C:\\Users\\Guinness\\images_alumni\\template\\default_front.jpg";
+                    String photo_path = "C:\\Users\\Guinness\\images_alumni\\" + my_alumni.alumni_no + ".jpg";
                     String id_no = my_alumni.alumni_no;
                     String name = my_alumni.fname + " " + my_alumni.mi + " " + my_alumni.lname;
                     String signature_path = "";
                     Srpt_card_front rpt = new Srpt_card_front(background_path, photo_path, id_no, name, signature_path);
                     String jrxml = "rpt_card_front.jrxml";
+                    System.out.println("rpt_card_front1:" + jrxml);
+                    System.out.println("background_path: " + background_path);
                     InputStream is = Srpt_card_front.class.getResourceAsStream(jrxml);
-
                     try {
 
                         JasperReport jasperReport = JasperCompileManager.compileReport(is);

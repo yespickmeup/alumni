@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" printOrder="Horizontal" pageWidth="242" pageHeight="153" orientation="Landscape" columnWidth="236" leftMargin="3" rightMargin="3" topMargin="3" bottomMargin="3" uuid="2fce21b8-3770-4cc1-967f-12ea3de5653d">
-	<property name="ireport.zoom" value="3.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" printOrder="Horizontal" pageWidth="242" pageHeight="153" orientation="Landscape" columnWidth="242" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2fce21b8-3770-4cc1-967f-12ea3de5653d">
+	<property name="ireport.zoom" value="4.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="fathers_name" class="java.lang.String"/>
@@ -12,45 +12,76 @@
 	<title>
 		<band height="147" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="f71ed9e4-e378-499e-9799-759e72b8d321" mode="Opaque" x="0" y="133" width="236" height="14" backcolor="#F8A61F"/>
-				<textElement/>
+				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="21" y="48" width="206" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[By using this card, Cardholder signifies  that   he/she  has]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="21" y="68" width="206" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[to be bound by them. To enjoy the full benefits of member]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="21" y="19" width="202" height="24"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="6"/>
+				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="0" y="30" width="236" height="11"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="21" y="58" width="206" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
 				</textElement>
-				<text><![CDATA[In case of emergency,]]></text>
+				<text><![CDATA[read the Terms & Conditions of membership, and  agrees]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="0" y="40" width="236" height="11"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="21" y="78" width="206" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
 				</textElement>
-				<text><![CDATA[please contact:]]></text>
+				<text><![CDATA[ship, please present this card when availing  of  privileges ]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="1b7982ca-780a-444b-aeee-32832a551359" x="0" y="61" width="236" height="11"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+			<staticText>
+				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="21" y="88" width="206" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{fathers_name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="1b7982ca-780a-444b-aeee-32832a551359" x="0" y="71" width="236" height="11"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+				<text><![CDATA[at partner establishments. It is non-transferable,  and  any]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="21" y="98" width="206" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{contact_no}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement uuid="1b7982ca-780a-444b-aeee-32832a551359" x="51" y="81" width="130" height="11"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+				<text><![CDATA[tampering will invalidate this card.If  found,  please  return]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="21" y="108" width="206" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[the Alumni Office, St. Paul University-Dumaguete, Bantayan,
+
+Office, St. Paul University-Dumaguete,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="714d7eb3-31b6-4d00-970d-d3c62cfc8283" x="21" y="118" width="206" height="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Bantayan, Dumaguete City.]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>

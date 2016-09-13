@@ -6,7 +6,6 @@
 package alumni.reports;
 
 import java.io.InputStream;
-import java.util.List;
 import javax.swing.JFrame;
 import mijzcx.synapse.desk.utils.Application;
 import mijzcx.synapse.desk.utils.JasperUtil;
@@ -34,17 +33,16 @@ public class Srpt_card_front {
         this.name = name;
         this.signature_path = signature_path;
     }
-    
-  
 
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
-        String background_path = home + "images_alumni\\template\\default_front.jpg";
-        String photo_path=home+"images_alumni\\000000000006.jpg";
-        String id_no="2015-00001";
-        String name="Ronald Pascua";
-        String signature_path="";
-        Srpt_card_front rpt = new Srpt_card_front(background_path, photo_path, id_no, name,signature_path);
+        String background_path = home + "\\images_alumni\\template\\default_front.jpg";
+        
+        String photo_path = home+ "\\images_alumni\\2016000001.jpg";
+        String id_no = "2015-00001";
+        String name = "Ronald Pascua";
+        String signature_path = "";
+        Srpt_card_front rpt = new Srpt_card_front(background_path, photo_path, id_no, name, signature_path);
 
         String jrxml = "rpt_card_front.jrxml";
         JRViewer viewer = get_viewer(rpt, jrxml);

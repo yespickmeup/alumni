@@ -1,0 +1,263 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package alumni.test;
+
+import alumni.utils.DateType;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.util.Date;
+import java.util.logging.Level;
+import mijzcx.synapse.desk.utils.CloseDialog;
+import mijzcx.synapse.desk.utils.FitIn;
+import mijzcx.synapse.desk.utils.KeyMapping;
+import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
+
+/**
+ *
+ * @author Guinness
+ */
+public class Dlg_bday extends javax.swing.JDialog {
+
+    /**
+     * Creates new form Dlg_bday
+     */
+    //<editor-fold defaultstate="collapsed" desc=" callback ">
+    private Callback callback;
+
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+
+    }
+
+    public static interface Callback {
+
+        void ok(CloseDialog closeDialog, OutputData data);
+    }
+
+    public static class InputData {
+    }
+
+    public static class OutputData {
+    }
+//</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" Constructors ">
+    private Dlg_bday(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        myInit();
+    }
+
+    private Dlg_bday(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        setUndecorated(true);
+        initComponents();
+        myInit();
+    }
+
+    public Dlg_bday() {
+        super();
+        setUndecorated(true);
+        initComponents();
+        myInit();
+
+    }
+    private Dlg_bday myRef;
+
+    private void setThisRef(Dlg_bday myRef) {
+        this.myRef = myRef;
+    }
+    private static java.util.Map<Object, Dlg_bday> dialogContainer = new java.util.HashMap();
+
+    public static void clearUpFirst(java.awt.Window parent) {
+        if (dialogContainer.containsKey(parent)) {
+            dialogContainer.remove(parent);
+        }
+    }
+
+    public static Dlg_bday create(java.awt.Window parent, boolean modal) {
+
+        if (modal) {
+            return create(parent, ModalityType.APPLICATION_MODAL);
+        }
+
+        return create(parent, ModalityType.MODELESS);
+
+    }
+
+    public static Dlg_bday create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+
+        if (parent instanceof java.awt.Frame) {
+
+            Dlg_bday dialog = dialogContainer.get(parent);
+
+            if (dialog == null) {
+                dialog = new Dlg_bday((java.awt.Frame) parent, false);
+                dialog.setModalityType(modalType);
+                dialogContainer.put(parent, dialog);
+                java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
+                dialog.setThisRef(dialog);
+                return dialog;
+            } else {
+                dialog.setModalityType(modalType);
+                return dialog;
+            }
+
+        }
+
+        if (parent instanceof java.awt.Dialog) {
+            Dlg_bday dialog = dialogContainer.get(parent);
+
+            if (dialog == null) {
+                dialog = new Dlg_bday((java.awt.Dialog) parent, false);
+                dialog.setModalityType(modalType);
+                dialogContainer.put(parent, dialog);
+                java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
+                dialog.setThisRef(dialog);
+                return dialog;
+            } else {
+                dialog.setModalityType(modalType);
+                return dialog;
+            }
+
+        }
+
+        return null;
+
+    }
+    //</editor-fold>    
+
+    //<editor-fold defaultstate="collapsed" desc=" main ">
+    public static void main(String args[]) {
+
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Dlg_bday dialog = Dlg_bday.create(new javax.swing.JFrame(), true);
+        dialog.setVisible(true);
+
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc=" added ">
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (visible == true) {
+            getContentPane().removeAll();
+            initComponents();
+            myInit();
+            repaint();
+        }
+
+    }
+
+    public javax.swing.JPanel getSurface() {
+        return (javax.swing.JPanel) getContentPane();
+    }
+
+    public void nullify() {
+        myRef.setVisible(false);
+        myRef = null;
+    }
+    //</editor-fold>
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
+        jSpinField1 = new com.toedter.components.JSpinField();
+        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jMonthChooser1.setFocusable(false);
+        jMonthChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jSpinField1.setFocusable(false);
+        jSpinField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jYearChooser1.setFocusable(false);
+        jYearChooser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(299, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(172, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JMonthChooser jMonthChooser1;
+    private com.toedter.components.JSpinField jSpinField1;
+    private com.toedter.calendar.JYearChooser jYearChooser1;
+    // End of variables declaration//GEN-END:variables
+    private void myInit() {
+        init_key();
+
+        String year = DateType.y.format(new Date());
+        jYearChooser1.setEndYear(FitIn.toInt(year));
+        jYearChooser1.setStartYear((FitIn.toInt(year) - 111));
+    }
+
+    public void do_pass() {
+
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Key">
+    private void disposed() {
+        this.dispose();
+    }
+
+    private void init_key() {
+        KeyMapping.mapKeyWIFW(getSurface(),
+                KeyEvent.VK_ESCAPE, new KeyAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                btn_0.doClick();
+                disposed();
+            }
+        });
+    }
+    // </editor-fold>
+}

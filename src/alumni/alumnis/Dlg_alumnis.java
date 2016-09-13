@@ -32,6 +32,7 @@ import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import javax.swing.UnsupportedLookAndFeelException;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
@@ -162,7 +163,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
 
         try {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
 
@@ -173,7 +174,6 @@ public class Dlg_alumnis extends javax.swing.JDialog {
         int ySize = ((int) tk.getScreenSize().
                 getHeight());
         dialog.setSize(xSize, ySize);
-
         dialog.setVisible(true);
 
     }
@@ -871,8 +871,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
         where2 = where2 + " and concat(fname,space(1),lname) like '%" + name + "%' order by lname asc ";
 
         where = where + where2;
-        
-      
+
         List< Alumnis.to_alumnis> datas = Alumnis.ret_data(where);
         loadData_official_schedule_types(datas);
         jLabel8.setText("" + datas.size());
@@ -947,8 +946,8 @@ public class Dlg_alumnis extends javax.swing.JDialog {
 
                 String home = System.getProperty("user.home", "");
 
-                String oldfile = home + "\\images_alumni\\default.jpg";
-                String newfile = home + "\\images_alumni\\" + alumni_no + ".jpg";
+                String oldfile = "C:\\Users\\Guinness\\images_alumni\\default.jpg";
+                String newfile = "C:\\Users\\Guinness\\images_alumni\\" + alumni_no + ".jpg";
 
                 File source = new File(oldfile);
                 System.out.println("Source: " + oldfile);
@@ -1135,7 +1134,7 @@ public class Dlg_alumnis extends javax.swing.JDialog {
 
     private void init_course_majors() {
         String where = "";
-       final  List<Course_majors.to_course_majors> levels = Course_majors.ret_data(where);
+        final List<Course_majors.to_course_majors> levels = Course_majors.ret_data(where);
 
         Object[][] obj = new Object[levels.size()][1];
         int i = 0;
