@@ -640,7 +640,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
             Window p = (Window) this;
             Dlg_print_id nd = Dlg_print_id.create(p, true);
             nd.setTitle("");
-            nd.do_pass(photo_path);
+            nd.do_pass(photo_path); //
             nd.setCallback(new Dlg_print_id.Callback() {
 
                 @Override

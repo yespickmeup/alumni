@@ -31,9 +31,9 @@ public class Srpt_cart_back {
     }
 
     public static void main(String[] args) {
-        String fathers_name = "Basilio Pascua Jr.";
-        String contact_no = "09161932567";
-        String address = "Canlas Subdivision, Lower Bagacay, Dumaguete City,Negros Oriental";
+        String fathers_name = "";
+        String contact_no = "";
+        String address = "";
 
         Srpt_cart_back rpt = new Srpt_cart_back(fathers_name, contact_no, address);
 
