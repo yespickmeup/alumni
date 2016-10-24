@@ -10,6 +10,7 @@ import alumni.alumnis.Dlg_print_id;
 import alumni.api.API;
 import alumni.reports.Srpt_card_front;
 import static alumni.reports.Srpt_card_front.get_viewer;
+import alumni.reports.Srpt_cart_back;
 import alumni.utils.Alert;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
@@ -45,6 +46,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
+import synsoftech.util.ImageRenderer1;
 
 /**
  *
@@ -346,12 +348,12 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
         );
@@ -476,7 +478,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         tbl_alumni_users.setModel(tbl_alumni_users_M);
         tbl_alumni_users.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_alumni_users.setRowHeight(25);
-        int[] tbl_widths_alumni_users = {150, 130, 130, 60, 100, 70, 70, 50, 60, 0, 0};
+        int[] tbl_widths_alumni_users = {140, 130, 130, 60, 100, 70, 70, 50, 30, 0, 0};
         for (int i = 0, n = tbl_widths_alumni_users.length; i < n; i++) {
             if (i == 4) {
                 continue;
@@ -489,6 +491,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         tbl_alumni_users.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_alumni_users.setRowHeight(25);
         tbl_alumni_users.setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_alumni_users.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer1());
     }
 
     public static void loadData_alumni_users(List<to_alumni_users> acc) {
@@ -556,7 +559,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                         return " Active";
                     }
                 case 8:
-                    return " Generate";
+                    return "/alumni/icons/progression.png";
                 case 9:
                     return tt.role;
                 default:
@@ -630,19 +633,19 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         final to_alumni_users user = (to_alumni_users) tbl_alumni_users_ALM.get(row);
         int col = tbl_alumni_users.getSelectedColumn();
         if (col == 8) {
+            String home = System.getProperty("user.home");
+            final String photo_path = home + "\\images_alumni\\users\\" + user.id + ".jpg";
+            final String background_path = home + "\\images_alumni\\template\\default_front.jpg";
             Window p = (Window) this;
             Dlg_print_id nd = Dlg_print_id.create(p, true);
             nd.setTitle("");
-
+            nd.do_pass(photo_path);
             nd.setCallback(new Dlg_print_id.Callback() {
 
                 @Override
                 public void front(CloseDialog closeDialog, Dlg_print_id.OutputData data) {
-                    closeDialog.ok();
-                    String home = System.getProperty("user.home");
-                    String background_path = home + "\\images_alumni\\template\\default_front.jpg";
+//                    closeDialog.ok();
 
-                    String photo_path = home + "\\images_alumni\\users\\" + user.id + ".jpg";
                     String id_no = "0000000000000" + user.id;
                     String name = user.first_name + " " + user.middle_name + " " + user.last_name;
                     String signature_path = "";
@@ -676,7 +679,31 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                 @Override
                 public void back(CloseDialog closeDialog, Dlg_print_id.OutputData data) {
                     closeDialog.ok();
+                    String fathers_name = "";
+                    String contact_no = "";
+                    String address = "";
 
+                    Srpt_cart_back rpt = new Srpt_cart_back(fathers_name, contact_no, address);
+
+                    String jrxml = "rpt_card_back.jrxml";
+                      InputStream is = Srpt_cart_back.class.getResourceAsStream(jrxml);
+                    try {
+                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
+                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
+                                setParameter(rpt), JasperUtil.emptyDatasource());
+                        if (jasperPrint != null) {
+                            try {
+                                JasperPrintManager.printReport(jasperPrint, false);
+                            } catch (Exception e) {
+                                System.out.println(e);
+                              
+                            }
+
+                        }
+                    } catch (JRException ex) {
+                        Logger.getLogger(Dlg_alumni_users.class.getName()).
+                                log(Level.SEVERE, null, ex);
+                    }
                 }
             });
             nd.setLocationRelativeTo(this);
