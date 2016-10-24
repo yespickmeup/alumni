@@ -2926,6 +2926,7 @@ public class Dlg_alumni_new extends javax.swing.JDialog {
                     String id_no = my_alumni.alumni_no;
                     String name = my_alumni.fname + " " + my_alumni.mi + " " + my_alumni.lname;
                     String signature_path = "";
+                    System.out.println("background_path: "+background_path);
                     Srpt_card_front rpt = new Srpt_card_front(background_path, photo_path, id_no, name, signature_path);
                     String jrxml = "rpt_card_front.jrxml";
                     System.out.println("rpt_card_front1:" + jrxml);
