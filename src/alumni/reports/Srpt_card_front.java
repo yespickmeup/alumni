@@ -38,9 +38,9 @@ public class Srpt_card_front {
         String home = System.getProperty("user.home");
         String background_path = home + "\\images_alumni\\template\\default_front.jpg";
         
-        String photo_path = home+ "\\images_alumni\\2016000001.jpg";
-        String id_no = "2015-00001";
-        String name = "Ronald Pascua";
+        String photo_path = home+ "\\images_alumni\\users\\3.jpg";
+        String id_no = "000000000000011";
+        String name = "Mary Josephine Teves Bandiola";
         String signature_path = "";
         Srpt_card_front rpt = new Srpt_card_front(background_path, photo_path, id_no, name, signature_path);
 
@@ -48,7 +48,8 @@ public class Srpt_card_front {
         JRViewer viewer = get_viewer(rpt, jrxml);
         JFrame f = Application.launchMainFrame3(viewer, "Sample", true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
+        
     }
 
     public static JasperReport compileJasper(String jrxml) {

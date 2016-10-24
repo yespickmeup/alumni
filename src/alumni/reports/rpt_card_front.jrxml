@@ -22,31 +22,25 @@
 				<imageExpression><![CDATA[$P{photo_path}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="66" y="101" width="132" height="12"/>
+				<reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="66" y="101" width="132" height="13"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="84" y="115" width="60" height="9"/>
+				<reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="87" y="115" width="111" height="11"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7" isBold="false"/>
+					<font fontName="Arial" size="9" isBold="false"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{id_no}]]></textFieldExpression>
 			</textField>
-			<componentElement>
-				<reportElement uuid="cfe9ce8f-32af-428c-ba99-1111482bd1ec" x="146" y="118" width="92" height="15"/>
-				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128A" drawText="false" checksumRequired="false" barWidth="0">
-					<jr:codeExpression><![CDATA[$P{id_no}]]></jr:codeExpression>
-				</jr:barbecue>
-			</componentElement>
 			<staticText>
-				<reportElement uuid="1e5a986a-05c2-4068-a5cf-263f375241e3" x="68" y="115" width="17" height="9"/>
+				<reportElement uuid="1e5a986a-05c2-4068-a5cf-263f375241e3" x="68" y="115" width="20" height="11"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="7"/>
+					<font fontName="Arial" size="9"/>
 				</textElement>
 				<text><![CDATA[ID #:]]></text>
 			</staticText>
