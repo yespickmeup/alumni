@@ -5,7 +5,12 @@
  */
 package alumni.courses;
 
+import alumni.course_majors.Course_majors;
 import alumni.utils.MyConnection;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,12 +20,87 @@ import java.util.ArrayList;
 import java.util.List;
 import mijzcx.synapse.desk.utils.Lg;
 import mijzcx.synapse.desk.utils.SqlStringUtil;
+import synsoftech.util.DateType;
 
 /**
  *
  * @author Guinness
  */
 public class Courses {
+
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        String line = "";
+        String cvsSplitBy = ",";
+
+        String csvFilePath = "C:\\Users\\Guinness\\Desktop\\Courses Offered in SPUD...csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+            Connection conn = MyConnection.connect();
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] list = line.split(cvsSplitBy);
+
+//                System.out.println("aa: " + list[0] + " course: " + list[1] + " major: " + list[2]);
+                int id = 0;
+                String created_at = DateType.now();
+                String updated_at = DateType.now();
+                String created_by = "";
+                String updated_by = "";
+                int status = 1;
+                int upload_status = 0;
+                String school_level_id = "0";
+                String course = list[1];
+
+//                to_courses co = new to_courses(id, created_at, updated_at, created_by, updated_by, status, upload_status, school_level_id, course);
+//                if (!course.isEmpty()) {
+//                    add_data(co);
+//                }
+                try {
+
+                    String s0 = "insert into test_laravel.majors("
+                            + " major"
+                            + ",level_id"
+                            + ",year_id"
+                            + ",course_id"
+                            + ",status"
+                            + ",created_at"
+                            + ",updated_at"
+                            + ")values("
+                            + " :major"
+                            + ",:level_id"
+                            + ",:year_id"
+                            + ",:course_id"
+                            + ",:status"
+                            + ",:created_at"
+                            + ",:updated_at"
+                            + ")";
+
+                    s0 = SqlStringUtil.parse(s0)
+                            .setString("major", list[2])
+                            .setString("level_id", "0")
+                            .setString("year_id", "0")
+                            .setString("course_id", "0")
+                            .setString("status", "1")
+                            .setString("created_at", DateType.now())
+                            .setString("updated_at", DateType.now())
+                            .ok();
+
+                    PreparedStatement stmt = conn.prepareStatement(s0);
+                    if (!list[2].isEmpty()) {
+                        stmt.execute();
+                    }
+
+                    Lg.s(Courses.class, "Successfully Added");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                } finally {
+
+                }
+
+            }
+        }
+
+    }
 
     public static class to_courses {
 

@@ -24,26 +24,19 @@
 			<textField>
 				<reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="66" y="101" width="132" height="13"/>
 				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="66" y="118" width="172" height="25"/>
+				<textElement verticalAlignment="Top">
 					<font fontName="Arial" size="11" isBold="true"/>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="87" y="115" width="111" height="11"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9" isBold="false"/>
-					<paragraph leftIndent="2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{id_no}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="1e5a986a-05c2-4068-a5cf-263f375241e3" x="68" y="115" width="20" height="11"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="9"/>
-				</textElement>
-				<text><![CDATA[ID #:]]></text>
-			</staticText>
 			<staticText>
 				<reportElement uuid="1e5a986a-05c2-4068-a5cf-263f375241e3" x="177" y="148" width="61" height="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
