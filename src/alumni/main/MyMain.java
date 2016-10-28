@@ -5,7 +5,7 @@
  */
 package alumni.main;
 
-import alumni.alumnis.Dlg_alumnis;
+import alumni.alumni_users.Dlg_alumni_users;
 import alumni.utils.Center;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -91,7 +91,7 @@ public class MyMain {
 
     private void start() {
         Application.setSystemLookAndFeel();
-        Dlg_alumnis pnl = new Dlg_alumnis();
+        Dlg_alumni_users pnl = new Dlg_alumni_users();
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().
                 getWidth());

@@ -482,7 +482,7 @@ public class Pnl_Dashboard extends javax.swing.JFrame {
         cardLayout.addLayoutComponent("2", jPanel1);
 
     }
-
+    
     private void time() {
 //        Thread t = new Thread(new Runnable() {
 //            @Override
