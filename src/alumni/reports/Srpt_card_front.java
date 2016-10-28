@@ -40,7 +40,7 @@ public class Srpt_card_front {
         
         String photo_path = home+ "\\images_alumni\\users\\3.jpg";
         String id_no = "000000000000011";
-        String name = "Mary Josephine Teves Bandiola";
+        String name = "Mary Josephine Teves Bandiola Mary Josephine Teves Bandiola";
         String signature_path = "";
         Srpt_card_front rpt = new Srpt_card_front(background_path, photo_path, id_no, name, signature_path);
 
