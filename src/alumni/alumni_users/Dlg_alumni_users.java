@@ -5,33 +5,30 @@
  */
 package alumni.alumni_users;
 
+import alumni.alumni_generated_cards.Alumni_generated_cards;
+import alumni.alumni_generated_cards.Alumni_generated_cards.to_alumni_generated_cards;
 import alumni.alumni_users.Alumni_users.to_alumni_users;
 import alumni.alumnis.Dlg_print_id;
 import alumni.api.API;
 import alumni.reports.Srpt_card_front;
-import static alumni.reports.Srpt_card_front.get_viewer;
 import alumni.reports.Srpt_cart_back;
 import alumni.utils.Alert;
+import alumni.utils.DateType;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
-import mijzcx.synapse.desk.utils.Application;
 import mijzcx.synapse.desk.utils.CloseDialog;
 import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
@@ -43,9 +40,9 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.swing.JRViewer;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
+
 import synsoftech.util.ImageRenderer1;
 
 /**
@@ -227,7 +224,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbl_alumni_generated_cards = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -284,7 +281,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox2.setText("ID No");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_alumni_generated_cards.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -295,7 +292,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbl_alumni_generated_cards);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Requisitions");
@@ -378,12 +375,13 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                         .addGap(1, 1, 1)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel5)))
                 .addGap(35, 35, 35))
         );
 
@@ -437,13 +435,14 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tbl_alumni_generated_cards;
     private javax.swing.JTable tbl_alumni_users;
     // End of variables declaration//GEN-END:variables
     private void myInit() {
         init_key();
         init_tbl_alumni_users(tbl_alumni_users);
+        init_tbl_alumni_generated_cards(tbl_alumni_generated_cards);
     }
 
     public void do_pass() {
@@ -632,6 +631,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         }
         final to_alumni_users user = (to_alumni_users) tbl_alumni_users_ALM.get(row);
         int col = tbl_alumni_users.getSelectedColumn();
+        ret_generated_cards();
         if (col == 8) {
             String home = System.getProperty("user.home");
             final String photo_path = home + "\\images_alumni\\users\\" + user.id + ".jpg";
@@ -663,6 +663,18 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                         if (jasperPrint != null) {
                             try {
                                 JasperPrintManager.printReport(jasperPrint, false);
+                                int id = 0;
+                                String created_at = DateType.now();
+                                String updated_at = DateType.now();
+                                String created_by = "";
+                                String updated_by = "";
+                                int status = 1;
+                                int upload_status = 0;
+                                String alumni_no = "";
+                                String student_no = "" + user.id;
+                                to_alumni_generated_cards card = new to_alumni_generated_cards(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no);
+                                Alumni_generated_cards.add_data(card);
+                                ret_generated_cards();
                             } catch (Exception e) {
                                 System.out.println(e);
                                 Alert.set(0, "Photo not found/corrupted!");
@@ -686,7 +698,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                     Srpt_cart_back rpt = new Srpt_cart_back(fathers_name, contact_no, address);
 
                     String jrxml = "rpt_card_back.jrxml";
-                      InputStream is = Srpt_cart_back.class.getResourceAsStream(jrxml);
+                    InputStream is = Srpt_cart_back.class.getResourceAsStream(jrxml);
                     try {
                         JasperReport jasperReport = JasperCompileManager.compileReport(is);
                         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
@@ -696,7 +708,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                                 JasperPrintManager.printReport(jasperPrint, false);
                             } catch (Exception e) {
                                 System.out.println(e);
-                              
+
                             }
 
                         }
@@ -710,4 +722,100 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
             nd.setVisible(true);
         }
     }
+
+    //<editor-fold defaultstate="collapsed" desc=" alumni_generated_cards "> 
+    public static ArrayListModel tbl_alumni_generated_cards_ALM;
+    public static Tblalumni_generated_cardsModel tbl_alumni_generated_cards_M;
+
+    public static void init_tbl_alumni_generated_cards(JTable tbl_alumni_generated_cards) {
+        tbl_alumni_generated_cards_ALM = new ArrayListModel();
+        tbl_alumni_generated_cards_M = new Tblalumni_generated_cardsModel(tbl_alumni_generated_cards_ALM);
+        tbl_alumni_generated_cards.setModel(tbl_alumni_generated_cards_M);
+        tbl_alumni_generated_cards.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tbl_alumni_generated_cards.setRowHeight(25);
+        int[] tbl_widths_alumni_generated_cards = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (int i = 0, n = tbl_widths_alumni_generated_cards.length; i < n; i++) {
+            if (i == 0) {
+                continue;
+            }
+            TableWidthUtilities.setColumnWidth(tbl_alumni_generated_cards, i, tbl_widths_alumni_generated_cards[i]);
+        }
+        Dimension d = tbl_alumni_generated_cards.getTableHeader().getPreferredSize();
+        d.height = 25;
+        tbl_alumni_generated_cards.getTableHeader().setPreferredSize(d);
+        tbl_alumni_generated_cards.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
+        tbl_alumni_generated_cards.setRowHeight(25);
+        tbl_alumni_generated_cards.setFont(new java.awt.Font("Arial", 0, 12));
+    }
+
+    public static void loadData_alumni_generated_cards(List<to_alumni_generated_cards> acc) {
+        tbl_alumni_generated_cards_ALM.clear();
+        tbl_alumni_generated_cards_ALM.addAll(acc);
+    }
+
+    public static class Tblalumni_generated_cardsModel extends AbstractTableAdapter {
+
+        public static String[] COLUMNS = {
+            "Date", "created_at", "updated_at", "created_by", "updated_by", "status", "upload_status", "alumni_no", "student_no"
+        };
+
+        public Tblalumni_generated_cardsModel(ListModel listmodel) {
+            super(listmodel, COLUMNS);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 100) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Class getColumnClass(int col) {
+            if (col == 1000) {
+                return Boolean.class;
+            }
+            return Object.class;
+        }
+
+        @Override
+        public Object getValueAt(int row, int col) {
+            to_alumni_generated_cards tt = (to_alumni_generated_cards) getRow(row);
+            switch (col) {
+                case 0:
+                    return " " + DateType.convert_slash_datetime3(tt.created_at);
+                case 1:
+                    return tt.created_at;
+                case 2:
+                    return tt.updated_at;
+                case 3:
+                    return tt.created_by;
+                case 4:
+                    return tt.updated_by;
+                case 5:
+                    return tt.status;
+                case 6:
+                    return tt.upload_status;
+                case 7:
+                    return tt.alumni_no;
+                default:
+                    return tt.student_no;
+            }
+        }
+    }
+
+    private void ret_generated_cards() {
+        int row = tbl_alumni_users.getSelectedRow();
+        if (row < 0) {
+            return;
+        }
+        to_alumni_users to = (to_alumni_users) tbl_alumni_users_ALM.get(row);
+        String where = " where student_no = '" + to.id + "'";
+        List<to_alumni_generated_cards> datas = Alumni_generated_cards.ret_data(where);
+        loadData_alumni_generated_cards(datas);
+        jLabel5.setText("" + datas.size());
+    }
+//</editor-fold> 
+
 }
