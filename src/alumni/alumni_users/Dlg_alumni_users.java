@@ -662,7 +662,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                                 setParameter(rpt), JasperUtil.emptyDatasource());
                         if (jasperPrint != null) {
                             try {
-                                JasperPrintManager.printReport(jasperPrint, false);
+                                JasperPrintManager.printReport(jasperPrint, true);
                                 int id = 0;
                                 String created_at = DateType.now();
                                 String updated_at = DateType.now();
@@ -705,7 +705,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                                 setParameter(rpt), JasperUtil.emptyDatasource());
                         if (jasperPrint != null) {
                             try {
-                                JasperPrintManager.printReport(jasperPrint, false);
+                                JasperPrintManager.printReport(jasperPrint, true);
                             } catch (Exception e) {
                                 System.out.println(e);
 

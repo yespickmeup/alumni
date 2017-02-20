@@ -45,7 +45,7 @@ public class Srpt_card_front {
         Srpt_card_front rpt = new Srpt_card_front(background_path, photo_path, id_no, name, signature_path);
 
         String jrxml = "rpt_card_front.jrxml";
-        JRViewer viewer = get_viewer(rpt, jrxml);
+        JRViewer viewer = Srpt_card_front.get_viewer(rpt, jrxml);
         JFrame f = Application.launchMainFrame3(viewer, "Sample", true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
