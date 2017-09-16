@@ -601,7 +601,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                         Alumni_users.add_data(data.users);
                         for (to_alumni_users to_alumni_users : data.users) {
                             try {
-                                String imageUrl = "http://spudaa.org/src/images/users/" + to_alumni_users.id + ".jpg";
+                                String imageUrl = "http://spudaa.com/src/images/users/" + to_alumni_users.id + ".jpg";
                                 String destinationFile = home + "\\images_alumni\\users\\" + to_alumni_users.id + ".jpg";
                                 API.saveImage(imageUrl, destinationFile);
                             } catch (IOException ex) {

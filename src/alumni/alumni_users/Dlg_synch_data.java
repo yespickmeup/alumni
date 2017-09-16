@@ -351,7 +351,7 @@ public class Dlg_synch_data extends javax.swing.JDialog {
 
             @Override
             public void run() {
-                String url = "http://spudaa.org/api/users";
+                String url = "http://spudaa.com/api/users";
                 API http = new API();
                 int status = 0;
                 String json_content;

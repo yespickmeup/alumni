@@ -35,7 +35,7 @@ public class API {
 //        String jsonString = http.sendGet();
 //        System.out.println(jsonString);
         API http = new API();
-        String url = "http://spudaa.org/api/users";
+        String url = "http://spudaa.com/api/users";
         String json_content = http.sendGet(url).toString();
         JSONParser parser = new JSONParser();
         JSONObject json = (JSONObject) parser.parse(json_content);
@@ -49,7 +49,7 @@ public class API {
             String first_name = ifNull(result.get("first_name"));
             System.out.println("id: " + id);
 
-            String imageUrl = "http://spudaa.org/src/images/users/" + id + ".jpg";
+            String imageUrl = "http://spudaa.com/src/images/users/" + id + ".jpg";
             String destinationFile = "C:\\Users\\Guinness\\Desktop\\" + id + ".jpg";
             saveImage(imageUrl, destinationFile);
         }
