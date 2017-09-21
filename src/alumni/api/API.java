@@ -13,7 +13,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.net.ssl.HttpsURLConnection;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -56,20 +59,26 @@ public class API {
 
     }
 
-    public static void saveImage(String imageUrl, String destinationFile) throws IOException {
-        URL url = new URL(imageUrl);
-        InputStream is = url.openStream();
-        OutputStream os = new FileOutputStream(destinationFile);
-
-        byte[] b = new byte[2048];
-        int length;
-
-        while ((length = is.read(b)) != -1) {
-            os.write(b, 0, length);
+    public static void saveImage(String imageUrl, String destinationFile) {
+        try {
+            URL url = new URL(imageUrl);
+            InputStream is = url.openStream();
+            OutputStream os = new FileOutputStream(destinationFile);
+            
+            byte[] b = new byte[2048];
+            int length;
+            
+            while ((length = is.read(b)) != -1) {
+                os.write(b, 0, length);
+            }
+            
+            is.close();
+            os.close();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        is.close();
-        os.close();
     }
 
     public static String ifNull(Object stmt) {

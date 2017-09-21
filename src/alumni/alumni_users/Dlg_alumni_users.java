@@ -21,7 +21,6 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
@@ -600,13 +599,11 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                         Alumni_users.delete_all();
                         Alumni_users.add_data(data.users);
                         for (to_alumni_users to_alumni_users : data.users) {
-                            try {
-                                String imageUrl = "http://spudaa.com/src/images/users/" + to_alumni_users.id + ".jpg";
-                                String destinationFile = home + "\\images_alumni\\users\\" + to_alumni_users.id + ".jpg";
-                                API.saveImage(imageUrl, destinationFile);
-                            } catch (IOException ex) {
-                                Logger.getLogger(Dlg_alumni_users.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+
+                            String imageUrl = "http://spudaa.com/src/images/users/" + to_alumni_users.id + ".jpg";
+                            String destinationFile = home + "\\images_alumni\\users\\" + to_alumni_users.id + ".jpg";
+                            API.saveImage(imageUrl, destinationFile);
+
                         }
                         ret_alumni_users();
                         Alert.set(0, "Data synch successfully!");
