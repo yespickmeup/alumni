@@ -7,11 +7,13 @@ package alumni.alumni_users;
 
 import alumni.api.API;
 import alumni.utils.Alert;
+import alumni.utils.DateType;
 import alumni.utils.Dlg_confirm_action;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import mijzcx.synapse.desk.utils.CloseDialog;
@@ -380,9 +382,31 @@ public class Dlg_synch_data extends javax.swing.JDialog {
                         String role = API.ifNull(result.get("role"));
                         int active = FitIn.toInt(result.get("active").toString());
 
-                        Alumni_users.to_alumni_users user = new Alumni_users.to_alumni_users(id, first_name, approved, role_id, email, suffix_name, middle_name, activated, last_name, role, active);
+                        String civil_status = API.ifNull(result.get("civil_status"));
+                        String gender = API.ifNull(result.get("gender"));
+                        String date_of_birth = API.ifNull(result.get("date_of_birth"));
+                        if (date_of_birth.equalsIgnoreCase("198081-12-07")) {
+                            date_of_birth = "1980-12-07";
+                        }
+                        Date d = new Date();
+                        try {
+                            d = DateType.sf.parse(date_of_birth);
+                            date_of_birth = DateType.sf.format(d);
+                        } catch (Exception e) {
+                            date_of_birth = null;
+                        }
+
+                        String blood_type = API.ifNull(result.get("blood_type"));
+                        String home_address = API.ifNull(result.get("home_address"));
+                        String level = API.ifNull(result.get("level"));
+                        String year = API.ifNull(result.get("year"));
+                        String course = API.ifNull(result.get("course"));
+                        String major = API.ifNull(result.get("major"));
+                        String image = API.ifNull(result.get("image"));
+
+                        Alumni_users.to_alumni_users user = new Alumni_users.to_alumni_users(id, first_name, approved, role_id, email, suffix_name, middle_name, activated, last_name, role, active, civil_status, gender, date_of_birth, blood_type, home_address, level, year, course, major, image);
                         datas.add(user);
-//                System.out.println("id: " + id);
+//                System.out.println("id: " + id);  
 
                     }
                     status = 1;

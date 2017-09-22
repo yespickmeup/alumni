@@ -9,11 +9,11 @@ import alumni.alumni_generated_cards.Alumni_generated_cards;
 import alumni.alumni_generated_cards.Alumni_generated_cards.to_alumni_generated_cards;
 import alumni.alumni_users.Alumni_users.to_alumni_users;
 import alumni.alumnis.Dlg_print_id;
+import alumni.alumnis.Dlg_upload_photo;
 import alumni.api.API;
-import alumni.reports.Srpt_card_front;
-import alumni.reports.Srpt_cart_back;
 import alumni.utils.Alert;
 import alumni.utils.DateType;
+import alumni.utils.ImageRenderer2;
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
 import com.jgoodies.binding.list.ArrayListModel;
 import java.awt.Dimension;
@@ -21,24 +21,15 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import mijzcx.synapse.desk.utils.CloseDialog;
-import mijzcx.synapse.desk.utils.JasperUtil;
 import mijzcx.synapse.desk.utils.KeyMapping;
 import mijzcx.synapse.desk.utils.KeyMapping.KeyAction;
 import mijzcx.synapse.desk.utils.TableWidthUtilities;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
-import net.sf.jasperreports.engine.JasperReport;
 import synsoftech.fields.Button;
 import synsoftech.fields.Field;
 
@@ -476,9 +467,9 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         tbl_alumni_users.setModel(tbl_alumni_users_M);
         tbl_alumni_users.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tbl_alumni_users.setRowHeight(25);
-        int[] tbl_widths_alumni_users = {140, 130, 130, 60, 100, 70, 70, 50, 30, 0, 0};
+        int[] tbl_widths_alumni_users = {25, 140, 130, 130, 130, 100, 70, 70, 70, 30, 30};
         for (int i = 0, n = tbl_widths_alumni_users.length; i < n; i++) {
-            if (i == 4) {
+            if (i == 5) {
                 continue;
             }
             TableWidthUtilities.setColumnWidth(tbl_alumni_users, i, tbl_widths_alumni_users[i]);
@@ -489,7 +480,9 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         tbl_alumni_users.getTableHeader().setFont(new java.awt.Font("Arial", 0, 12));
         tbl_alumni_users.setRowHeight(25);
         tbl_alumni_users.setFont(new java.awt.Font("Arial", 0, 12));
-        tbl_alumni_users.getColumnModel().getColumn(8).setCellRenderer(new ImageRenderer1());
+        tbl_alumni_users.getColumnModel().getColumn(9).setCellRenderer(new ImageRenderer1());
+        tbl_alumni_users.getColumnModel().getColumn(10).setCellRenderer(new ImageRenderer1());
+        tbl_alumni_users.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer2());
     }
 
     public static void loadData_alumni_users(List<to_alumni_users> acc) {
@@ -500,7 +493,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
     public static class Tblalumni_usersModel extends AbstractTableAdapter {
 
         public static String[] COLUMNS = {
-            "ID No", "Last Name", "First Name", "Middle Name", "Email Address", "Activated", "Approved", "Active", "", "role", "active"
+            "", "ID No", "Last Name", "First Name", "Middle Name", "Email Address", "Activated", "Approved", "Active", "", ""
         };
 
         public Tblalumni_usersModel(ListModel listmodel) {
@@ -526,42 +519,49 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         @Override
         public Object getValueAt(int row, int col) {
             to_alumni_users tt = (to_alumni_users) getRow(row);
+            final String home = System.getProperty("user.home", "");
+            String destinationFile = home + "\\images_alumni\\users\\" + tt.image;
+
             switch (col) {
                 case 0:
-                    return " 0000000000000" + tt.id;
+                    if (tt.image.isEmpty()) {
+                        return destinationFile + "user2-160x160.jpg";
+                    } else {
+                        return destinationFile;
+                    }
                 case 1:
-                    return " " + tt.last_name;
+                    return " 0000000000000" + tt.id;
                 case 2:
-                    return " " + tt.first_name;
+                    return " " + tt.last_name;
                 case 3:
-                    return " " + tt.middle_name;
+                    return " " + tt.first_name;
                 case 4:
-                    return " " + tt.email;
+                    return " " + tt.middle_name;
                 case 5:
+                    return " " + tt.email;
+
+                case 6:
                     if (tt.activated == 0) {
                         return " Pending";
                     } else {
                         return " Activated";
                     }
-
-                case 6:
+                case 7:
                     if (tt.approved == 0) {
                         return " Pending";
                     } else {
                         return " Activated";
                     }
-                case 7:
+                case 8:
                     if (tt.active == 0) {
                         return " Disabled";
                     } else {
                         return " Active";
                     }
-                case 8:
-                    return "/alumni/icons/progression.png";
                 case 9:
-                    return tt.role;
+                    return "/alumni/icons/id-card.png";
                 default:
-                    return tt.active;
+                    return "/alumni/icons/photo-camera.png";
             }
         }
     }
@@ -599,11 +599,11 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                         Alumni_users.delete_all();
                         Alumni_users.add_data(data.users);
                         for (to_alumni_users to_alumni_users : data.users) {
-
-                            String imageUrl = "http://spudaa.com/src/images/users/" + to_alumni_users.id + ".jpg";
-                            String destinationFile = home + "\\images_alumni\\users\\" + to_alumni_users.id + ".jpg";
-                            API.saveImage(imageUrl, destinationFile);
-
+                            if (!to_alumni_users.image.isEmpty()) {
+                                String imageUrl = "http://spudaa.com/src/images/users/" + to_alumni_users.image;
+                                String destinationFile = home + "\\images_alumni\\users\\" + to_alumni_users.image;
+                                API.saveImage(imageUrl, destinationFile);
+                            }
                         }
                         ret_alumni_users();
                         Alert.set(0, "Data synch successfully!");
@@ -629,90 +629,53 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         final to_alumni_users user = (to_alumni_users) tbl_alumni_users_ALM.get(row);
         int col = tbl_alumni_users.getSelectedColumn();
         ret_generated_cards();
-        if (col == 8) {
+        if (col == 9) {
             String home = System.getProperty("user.home");
-            final String photo_path = home + "\\images_alumni\\users\\" + user.id + ".jpg";
-            final String background_path = home + "\\images_alumni\\template\\default_front.jpg";
+            String photo_path = home + "\\images_alumni\\users\\" + user.image;
+            if (user.image.isEmpty()) {
+                photo_path = home + "\\images_alumni\\users\\" + "user2-160x160.jpg";
+            }
+
             Window p = (Window) this;
             Dlg_print_id nd = Dlg_print_id.create(p, true);
             nd.setTitle("");
-            nd.do_pass(photo_path); //
+            nd.do_pass(photo_path, user); //
             nd.setCallback(new Dlg_print_id.Callback() {
 
                 @Override
                 public void front(CloseDialog closeDialog, Dlg_print_id.OutputData data) {
 //                    closeDialog.ok();
 
-                    String id_no = "0000000000000" + user.id;
-                    String name = user.first_name + " " + user.middle_name + " " + user.last_name;
-                    String signature_path = "";
-                    Srpt_card_front rpt = new Srpt_card_front(background_path, photo_path, id_no, name, signature_path);
-                    String jrxml = "rpt_card_front.jrxml";
-//                    JRViewer viewer = get_viewer(rpt, jrxml);
-//                    JFrame f = Application.launchMainFrame3(viewer, "Sample", true);
-//                    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-                    InputStream is = Srpt_card_front.class.getResourceAsStream(jrxml);
-                    try {
-                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
-                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                                setParameter(rpt), JasperUtil.emptyDatasource());
-                        if (jasperPrint != null) {
-                            try {
-                                JasperPrintManager.printReport(jasperPrint, true);
-                                int id = 0;
-                                String created_at = DateType.now();
-                                String updated_at = DateType.now();
-                                String created_by = "";
-                                String updated_by = "";
-                                int status = 1;
-                                int upload_status = 0;
-                                String alumni_no = "";
-                                String student_no = "" + user.id;
-                                to_alumni_generated_cards card = new to_alumni_generated_cards(id, created_at, updated_at, created_by, updated_by, status, upload_status, alumni_no, student_no);
-                                Alumni_generated_cards.add_data(card);
-                                ret_generated_cards();
-                            } catch (Exception e) {
-                                System.out.println(e);
-                                Alert.set(0, "Photo not found/corrupted!");
-                            }
-
-                        }
-                    } catch (JRException ex) {
-                        Logger.getLogger(Dlg_alumni_users.class.getName()).
-                                log(Level.SEVERE, null, ex);
-                    }
+                    ret_generated_cards();
 
                 }
 
                 @Override
                 public void back(CloseDialog closeDialog, Dlg_print_id.OutputData data) {
                     closeDialog.ok();
-                    String fathers_name = "";
-                    String contact_no = "";
-                    String address = "";
 
-                    Srpt_cart_back rpt = new Srpt_cart_back(fathers_name, contact_no, address);
+                }
+            });
+            nd.setLocationRelativeTo(this);
+            nd.setVisible(true);
+        }
+        if (col == 10) {
+            String home = System.getProperty("user.home");
+            String photo_path = home + "\\images_alumni\\users\\" + user.image;
+            if (user.image.isEmpty()) {
+                photo_path = home + "\\images_alumni\\users\\" + "user2-160x160.jpg";
+            }
 
-                    String jrxml = "rpt_card_back.jrxml";
-                    InputStream is = Srpt_cart_back.class.getResourceAsStream(jrxml);
-                    try {
-                        JasperReport jasperReport = JasperCompileManager.compileReport(is);
-                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, JasperUtil.
-                                setParameter(rpt), JasperUtil.emptyDatasource());
-                        if (jasperPrint != null) {
-                            try {
-                                JasperPrintManager.printReport(jasperPrint, true);
-                            } catch (Exception e) {
-                                System.out.println(e);
-
-                            }
-
-                        }
-                    } catch (JRException ex) {
-                        Logger.getLogger(Dlg_alumni_users.class.getName()).
-                                log(Level.SEVERE, null, ex);
-                    }
+            Window p = (Window) this;
+            Dlg_upload_photo nd = Dlg_upload_photo.create(p, true);
+            nd.setTitle("");
+            nd.do_pass(photo_path, user); //
+            nd.setCallback(new Dlg_upload_photo.Callback() {
+                @Override
+                public void back(CloseDialog closeDialog, Dlg_upload_photo.OutputData data) {
+                }
+                @Override
+                public void front(CloseDialog closeDialog, Dlg_upload_photo.OutputData data) {
                 }
             });
             nd.setLocationRelativeTo(this);

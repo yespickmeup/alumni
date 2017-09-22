@@ -35,8 +35,18 @@ public class Alumni_users {
         public final String last_name;
         public final String role;
         public final int active;
+        public final String civil_status;
+        public final String gender;
+        public final String date_of_birth;
+        public final String blood_type;
+        public final String home_address;
+        public final String level;
+        public final String year;
+        public final String course;
+        public final String major;
+        public final String image;
 
-        public to_alumni_users(int id, String first_name, int approved, int role_id, String email, String suffix_name, String middle_name, int activated, String last_name, String role, int active) {
+        public to_alumni_users(int id, String first_name, int approved, int role_id, String email, String suffix_name, String middle_name, int activated, String last_name, String role, int active, String civil_status, String gender, String date_of_birth, String blood_type, String home_address, String level, String year, String course, String major, String image) {
             this.id = id;
             this.first_name = first_name;
             this.approved = approved;
@@ -48,6 +58,16 @@ public class Alumni_users {
             this.last_name = last_name;
             this.role = role;
             this.active = active;
+            this.civil_status = civil_status;
+            this.gender = gender;
+            this.date_of_birth = date_of_birth;
+            this.blood_type = blood_type;
+            this.home_address = home_address;
+            this.level = level;
+            this.year = year;
+            this.course = course;
+            this.major = major;
+            this.image = image;
         }
     }
 
@@ -67,6 +87,16 @@ public class Alumni_users {
                         + ",last_name"
                         + ",role"
                         + ",active"
+                        + ",civil_status"
+                        + ",gender"
+                        + ",date_of_birth"
+                        + ",blood_type"
+                        + ",home_address"
+                        + ",level"
+                        + ",year"
+                        + ",course"
+                        + ",major"
+                        + ",image"
                         + ")values("
                         + ":id"
                         + ",:first_name"
@@ -79,6 +109,16 @@ public class Alumni_users {
                         + ",:last_name"
                         + ",:role"
                         + ",:active"
+                        + ",:civil_status"
+                        + ",:gender"
+                        + ",:date_of_birth"
+                        + ",:blood_type"
+                        + ",:home_address"
+                        + ",:level"
+                        + ",:year"
+                        + ",:course"
+                        + ",:major"
+                        + ",:image"
                         + ")";
 
                 s0 = SqlStringUtil.parse(s0)
@@ -93,6 +133,16 @@ public class Alumni_users {
                         .setString("last_name", to_alumni_users.last_name)
                         .setString("role", to_alumni_users.role)
                         .setNumber("active", to_alumni_users.active)
+                        .setString("civil_status", to_alumni_users.civil_status)
+                        .setString("gender", to_alumni_users.gender)
+                        .setString("date_of_birth", to_alumni_users.date_of_birth)
+                        .setString("blood_type", to_alumni_users.blood_type)
+                        .setString("home_address", to_alumni_users.home_address)
+                        .setString("level", to_alumni_users.level)
+                        .setString("year", to_alumni_users.year)
+                        .setString("course", to_alumni_users.course)
+                        .setString("major", to_alumni_users.major)
+                        .setString("image", to_alumni_users.image)
                         .ok();
 
                 PreparedStatement stmt = conn.prepareStatement(s0);
@@ -197,6 +247,16 @@ public class Alumni_users {
                     + ",last_name"
                     + ",role"
                     + ",active"
+                    + ",civil_status"
+                    + ",gender"
+                    + ",date_of_birth"
+                    + ",blood_type"
+                    + ",home_address"
+                    + ",level"
+                    + ",year"
+                    + ",course"
+                    + ",major"
+                    + ",image"
                     + " from alumni_users"
                     + " " + where;
 
@@ -214,8 +274,18 @@ public class Alumni_users {
                 String last_name = rs.getString(9);
                 String role = rs.getString(10);
                 int active = rs.getInt(11);
+                String civil_status = rs.getString(12);
+                String gender = rs.getString(13);
+                String date_of_birth = rs.getString(14);
+                String blood_type = rs.getString(15);
+                String home_address = rs.getString(16);
+                String level = rs.getString(17);
+                String year = rs.getString(18);
+                String course = rs.getString(19);
+                String major = rs.getString(20);
+                String image = rs.getString(21);
 
-                to_alumni_users to = new to_alumni_users(id, first_name, approved, role_id, email, suffix_name, middle_name, activated, last_name, role, active);
+                to_alumni_users to = new to_alumni_users(id, first_name, approved, role_id, email, suffix_name, middle_name, activated, last_name, role, active, civil_status, gender, date_of_birth, blood_type, home_address, level, year, course, major, image);
                 datas.add(to);
             }
             return datas;

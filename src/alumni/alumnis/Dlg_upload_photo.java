@@ -37,7 +37,7 @@ import synsoftech.fields.Field;
  *
  * @author Guinness
  */
-public class Dlg_print_id extends javax.swing.JDialog {
+public class Dlg_upload_photo extends javax.swing.JDialog {
 
     /**
      * Creates new form Dlg_print_id
@@ -66,33 +66,33 @@ public class Dlg_print_id extends javax.swing.JDialog {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc=" Constructors ">
-    private Dlg_print_id(java.awt.Frame parent, boolean modal) {
+    private Dlg_upload_photo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    private Dlg_print_id(java.awt.Dialog parent, boolean modal) {
+    private Dlg_upload_photo(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
         myInit();
     }
 
-    public Dlg_print_id() {
+    public Dlg_upload_photo() {
         super();
         setUndecorated(true);
         initComponents();
         myInit();
 
     }
-    private Dlg_print_id myRef;
+    private Dlg_upload_photo myRef;
 
-    private void setThisRef(Dlg_print_id myRef) {
+    private void setThisRef(Dlg_upload_photo myRef) {
         this.myRef = myRef;
     }
-    private static java.util.Map<Object, Dlg_print_id> dialogContainer = new java.util.HashMap();
+    private static java.util.Map<Object, Dlg_upload_photo> dialogContainer = new java.util.HashMap();
 
     public static void clearUpFirst(java.awt.Window parent) {
         if (dialogContainer.containsKey(parent)) {
@@ -100,7 +100,7 @@ public class Dlg_print_id extends javax.swing.JDialog {
         }
     }
 
-    public static Dlg_print_id create(java.awt.Window parent, boolean modal) {
+    public static Dlg_upload_photo create(java.awt.Window parent, boolean modal) {
 
         if (modal) {
             return create(parent, ModalityType.APPLICATION_MODAL);
@@ -110,14 +110,14 @@ public class Dlg_print_id extends javax.swing.JDialog {
 
     }
 
-    public static Dlg_print_id create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
+    public static Dlg_upload_photo create(java.awt.Window parent, java.awt.Dialog.ModalityType modalType) {
 
         if (parent instanceof java.awt.Frame) {
 
-            Dlg_print_id dialog = dialogContainer.get(parent);
+            Dlg_upload_photo dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_print_id((java.awt.Frame) parent, false);
+                dialog = new Dlg_upload_photo((java.awt.Frame) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -131,10 +131,10 @@ public class Dlg_print_id extends javax.swing.JDialog {
         }
 
         if (parent instanceof java.awt.Dialog) {
-            Dlg_print_id dialog = dialogContainer.get(parent);
+            Dlg_upload_photo dialog = dialogContainer.get(parent);
 
             if (dialog == null) {
-                dialog = new Dlg_print_id((java.awt.Dialog) parent, false);
+                dialog = new Dlg_upload_photo((java.awt.Dialog) parent, false);
                 dialog.setModalityType(modalType);
                 dialogContainer.put(parent, dialog);
                 java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, "instances: {0}", dialogContainer.size());
@@ -161,7 +161,7 @@ public class Dlg_print_id extends javax.swing.JDialog {
             throw new RuntimeException(e);
         }
 
-        Dlg_print_id dialog = Dlg_print_id.create(new javax.swing.JFrame(), true);
+        Dlg_upload_photo dialog = Dlg_upload_photo.create(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
 
     }
@@ -232,8 +232,8 @@ public class Dlg_print_id extends javax.swing.JDialog {
         jTextField10 = new Field.Input();
         jPanel2 = new javax.swing.JPanel();
         jButton8 = new Button.Info();
-        jButton9 = new Button.Info();
         jButton10 = new Button.Default();
+        jButton9 = new Button.Info();
         jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -347,17 +347,11 @@ public class Dlg_print_id extends javax.swing.JDialog {
         jTextField10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField10.setFocusable(false);
 
-        jButton8.setText("Print Front ID");
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alumni/icons/photo-camera (1).png"))); // NOI18N
+        jButton8.setText("Start Capture");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setText("Print Back ID");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
             }
         });
 
@@ -368,6 +362,14 @@ public class Dlg_print_id extends javax.swing.JDialog {
             }
         });
 
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alumni/icons/desktop-computer.png"))); // NOI18N
+        jButton9.setText("Browse");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         jProgressBar1.setString("");
         jProgressBar1.setStringPainted(true);
 
@@ -375,20 +377,20 @@ public class Dlg_print_id extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -518,17 +520,17 @@ public class Dlg_print_id extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        disposed();
+    }//GEN-LAST:event_jButton10ActionPerformed
+
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         front();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        back();
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        disposed();
-    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
