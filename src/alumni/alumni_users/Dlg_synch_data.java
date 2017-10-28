@@ -53,9 +53,11 @@ public class Dlg_synch_data extends javax.swing.JDialog {
     public static class OutputData {
 
         public final List<Alumni_users.to_alumni_users> users;
+        public final int new_only;
 
-        public OutputData(List<Alumni_users.to_alumni_users> users) {
+        public OutputData(List<Alumni_users.to_alumni_users> users, int new_only) {
             this.users = users;
+            this.new_only = new_only;
         }
 
     }
@@ -195,6 +197,7 @@ public class Dlg_synch_data extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new Button.Info();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -203,6 +206,8 @@ public class Dlg_synch_data extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new Button.Success();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -235,6 +240,13 @@ public class Dlg_synch_data extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup1.add(jCheckBox1);
+        jCheckBox1.setSelected(true);
+        jCheckBox1.setText("New Data Only");
+
+        buttonGroup1.add(jCheckBox2);
+        jCheckBox2.setText("All");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -242,6 +254,10 @@ public class Dlg_synch_data extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox2))
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -275,7 +291,11 @@ public class Dlg_synch_data extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBox2))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -305,8 +325,11 @@ public class Dlg_synch_data extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -464,8 +487,12 @@ public class Dlg_synch_data extends javax.swing.JDialog {
     }
 
     private void ok2() {
+        int new_only = 0;
+        if (jCheckBox1.isSelected()) {
+            new_only = 1;
+        }
         if (callback != null) {
-            callback.ok(new CloseDialog(this), new OutputData(datas));
+            callback.ok(new CloseDialog(this), new OutputData(datas, new_only));
         }
     }
 }

@@ -21,6 +21,7 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JTable;
@@ -520,15 +521,22 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
         public Object getValueAt(int row, int col) {
             to_alumni_users tt = (to_alumni_users) getRow(row);
             final String home = System.getProperty("user.home", "");
-            String destinationFile = home + "\\images_alumni\\users\\" + tt.image;
+            String destinationFile = home + "\\images_alumni\\users\\";
 
             switch (col) {
                 case 0:
                     if (tt.image.isEmpty()) {
                         return destinationFile + "user2-160x160.jpg";
                     } else {
-                        return destinationFile;
+                        File f = new File(destinationFile + tt.image);
+                        if (!f.exists()) {
+                            return destinationFile + "user2-160x160.jpg";
+                        } else {
+                            return destinationFile + tt.image;
+                        }
+
                     }
+
                 case 1:
                     return " 0000000000000" + tt.id;
                 case 2:
@@ -596,14 +604,34 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
 
                     @Override
                     public void run() {
-                        Alumni_users.delete_all();
-                        Alumni_users.add_data(data.users);
+                        if (data.new_only == 0) {
+                            Alumni_users.delete_all();
+                        }
+                        List<to_alumni_users> last = Alumni_users.ret_data(" order by id desc limit 1");
+                        int last_id = 0;
+                        for (to_alumni_users u : last) {
+                            last_id = u.id;
+                        }
+                        System.out.println("last_id: "+last_id);
+                        Alumni_users.add_data(data.users, data.new_only, last_id);
+
+                        if (data.new_only == 0) {
+                            last_id = 0;
+                        }
+                        
                         for (to_alumni_users to_alumni_users : data.users) {
-                            if (!to_alumni_users.image.isEmpty()) {
-                                String imageUrl = "http://spudaa.com/src/images/users/" + to_alumni_users.image;
-                                String destinationFile = home + "\\images_alumni\\users\\" + to_alumni_users.image;
-                                API.saveImage(imageUrl, destinationFile);
+                            if (to_alumni_users.id > last_id) {
+                                if (!to_alumni_users.image.isEmpty()) {
+                                    String imageUrl = "http://spudaa.com/src/images/users/" + to_alumni_users.image;
+                                    String destinationFile = home + "\\images_alumni\\users\\" + to_alumni_users.image;
+                                    File f = new File(destinationFile);
+                                    if (!f.exists()) {
+                                        System.out.println("destinationFile: " + destinationFile);
+                                        API.saveImage(imageUrl, destinationFile);
+                                    }
+                                }
                             }
+
                         }
                         ret_alumni_users();
                         Alert.set(0, "Data synch successfully!");
@@ -674,6 +702,7 @@ public class Dlg_alumni_users extends javax.swing.JDialog {
                 @Override
                 public void back(CloseDialog closeDialog, Dlg_upload_photo.OutputData data) {
                 }
+
                 @Override
                 public void front(CloseDialog closeDialog, Dlg_upload_photo.OutputData data) {
                 }

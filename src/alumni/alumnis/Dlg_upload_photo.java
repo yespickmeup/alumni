@@ -8,6 +8,7 @@ package alumni.alumnis;
 import alumni.alumni_generated_cards.Alumni_generated_cards;
 import alumni.alumni_users.Alumni_users;
 import alumni.alumni_users.Dlg_alumni_users;
+import alumni.api.API;
 import alumni.reports.Srpt_card_front;
 import alumni.reports.Srpt_cart_back;
 import alumni.utils.Alert;
@@ -15,6 +16,7 @@ import alumni.utils.DateType;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -349,6 +351,7 @@ public class Dlg_upload_photo extends javax.swing.JDialog {
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alumni/icons/photo-camera (1).png"))); // NOI18N
         jButton8.setText("Start Capture");
+        jButton8.setEnabled(false);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -363,7 +366,7 @@ public class Dlg_upload_photo extends javax.swing.JDialog {
         });
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alumni/icons/desktop-computer.png"))); // NOI18N
-        jButton9.setText("Browse");
+        jButton9.setText("Download");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -529,7 +532,7 @@ public class Dlg_upload_photo extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        download();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
@@ -580,8 +583,10 @@ public class Dlg_upload_photo extends javax.swing.JDialog {
     }
     String image = "";
     int id = 0;
+    Alumni_users.to_alumni_users to_alumni_users = null;
 
     public void do_pass(String url, final Alumni_users.to_alumni_users user) {
+        to_alumni_users = user;
         final ImageIcon icon = new ImageIcon(url);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -752,4 +757,35 @@ public class Dlg_upload_photo extends javax.swing.JDialog {
         t.start();
 
     }
+
+    private void download() {
+        jButton8.setEnabled(false);
+        jButton9.setEnabled(false);
+        jProgressBar1.setString("Loading...Please wait...");
+        jProgressBar1.setIndeterminate(true);
+        Thread t = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                final String home = System.getProperty("user.home", "");
+                String imageUrl = "http://spudaa.com/src/images/users/" + to_alumni_users.image;
+                String destinationFile = home + "\\images_alumni\\users\\" + to_alumni_users.image;
+                File f = new File(destinationFile);
+                if (!to_alumni_users.image.isEmpty()) {
+                    API.saveImage(imageUrl, destinationFile);
+                    Alert.set(2, "");
+                    disposed();
+                }else{
+                    Alert.set(0, "No Photo Uploaded Online!");
+                }
+//                jButton8.setEnabled(true);
+                jButton9.setEnabled(true);
+                jProgressBar1.setString("Finished...");
+                jProgressBar1.setIndeterminate(false);
+            }
+        });
+        t.start();
+
+    }
+
 }

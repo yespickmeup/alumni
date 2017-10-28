@@ -71,84 +71,167 @@ public class Alumni_users {
         }
     }
 
-    public static void add_data(List<to_alumni_users> to_alumni_users1) {
+    public static void add_data(List<to_alumni_users> to_alumni_users1, int new_only,int last_id) {
         try {
             Connection conn = MyConnection.connect();
-            for (to_alumni_users to_alumni_users : to_alumni_users1) {
-                String s0 = "insert into alumni_users("
-                        + "id"
-                        + ",first_name"
-                        + ",approved"
-                        + ",role_id"
-                        + ",email"
-                        + ",suffix_name"
-                        + ",middle_name"
-                        + ",activated"
-                        + ",last_name"
-                        + ",role"
-                        + ",active"
-                        + ",civil_status"
-                        + ",gender"
-                        + ",date_of_birth"
-                        + ",blood_type"
-                        + ",home_address"
-                        + ",level"
-                        + ",year"
-                        + ",course"
-                        + ",major"
-                        + ",image"
-                        + ")values("
-                        + ":id"
-                        + ",:first_name"
-                        + ",:approved"
-                        + ",:role_id"
-                        + ",:email"
-                        + ",:suffix_name"
-                        + ",:middle_name"
-                        + ",:activated"
-                        + ",:last_name"
-                        + ",:role"
-                        + ",:active"
-                        + ",:civil_status"
-                        + ",:gender"
-                        + ",:date_of_birth"
-                        + ",:blood_type"
-                        + ",:home_address"
-                        + ",:level"
-                        + ",:year"
-                        + ",:course"
-                        + ",:major"
-                        + ",:image"
-                        + ")";
+            conn.setAutoCommit(false);
+           
+            PreparedStatement stmt = conn.prepareStatement("");
+            if (new_only == 1) {
+                for (to_alumni_users to_alumni_users : to_alumni_users1) {
+                    if (to_alumni_users.id > last_id) {
+                        String s0 = "insert into alumni_users("
+                                + "id"
+                                + ",first_name"
+                                + ",approved"
+                                + ",role_id"
+                                + ",email"
+                                + ",suffix_name"
+                                + ",middle_name"
+                                + ",activated"
+                                + ",last_name"
+                                + ",role"
+                                + ",active"
+                                + ",civil_status"
+                                + ",gender"
+                                + ",date_of_birth"
+                                + ",blood_type"
+                                + ",home_address"
+                                + ",level"
+                                + ",year"
+                                + ",course"
+                                + ",major"
+                                + ",image"
+                                + ")values("
+                                + ":id"
+                                + ",:first_name"
+                                + ",:approved"
+                                + ",:role_id"
+                                + ",:email"
+                                + ",:suffix_name"
+                                + ",:middle_name"
+                                + ",:activated"
+                                + ",:last_name"
+                                + ",:role"
+                                + ",:active"
+                                + ",:civil_status"
+                                + ",:gender"
+                                + ",:date_of_birth"
+                                + ",:blood_type"
+                                + ",:home_address"
+                                + ",:level"
+                                + ",:year"
+                                + ",:course"
+                                + ",:major"
+                                + ",:image"
+                                + ")";
 
-                s0 = SqlStringUtil.parse(s0)
-                        .setNumber("id", to_alumni_users.id)
-                        .setString("first_name", to_alumni_users.first_name)
-                        .setNumber("approved", to_alumni_users.approved)
-                        .setNumber("role_id", to_alumni_users.role_id)
-                        .setString("email", to_alumni_users.email)
-                        .setString("suffix_name", to_alumni_users.suffix_name)
-                        .setString("middle_name", to_alumni_users.middle_name)
-                        .setNumber("activated", to_alumni_users.activated)
-                        .setString("last_name", to_alumni_users.last_name)
-                        .setString("role", to_alumni_users.role)
-                        .setNumber("active", to_alumni_users.active)
-                        .setString("civil_status", to_alumni_users.civil_status)
-                        .setString("gender", to_alumni_users.gender)
-                        .setString("date_of_birth", to_alumni_users.date_of_birth)
-                        .setString("blood_type", to_alumni_users.blood_type)
-                        .setString("home_address", to_alumni_users.home_address)
-                        .setString("level", to_alumni_users.level)
-                        .setString("year", to_alumni_users.year)
-                        .setString("course", to_alumni_users.course)
-                        .setString("major", to_alumni_users.major)
-                        .setString("image", to_alumni_users.image)
-                        .ok();
+                        s0 = SqlStringUtil.parse(s0)
+                                .setNumber("id", to_alumni_users.id)
+                                .setString("first_name", to_alumni_users.first_name)
+                                .setNumber("approved", to_alumni_users.approved)
+                                .setNumber("role_id", to_alumni_users.role_id)
+                                .setString("email", to_alumni_users.email)
+                                .setString("suffix_name", to_alumni_users.suffix_name)
+                                .setString("middle_name", to_alumni_users.middle_name)
+                                .setNumber("activated", to_alumni_users.activated)
+                                .setString("last_name", to_alumni_users.last_name)
+                                .setString("role", to_alumni_users.role)
+                                .setNumber("active", to_alumni_users.active)
+                                .setString("civil_status", to_alumni_users.civil_status)
+                                .setString("gender", to_alumni_users.gender)
+                                .setString("date_of_birth", to_alumni_users.date_of_birth)
+                                .setString("blood_type", to_alumni_users.blood_type)
+                                .setString("home_address", to_alumni_users.home_address)
+                                .setString("level", to_alumni_users.level)
+                                .setString("year", to_alumni_users.year)
+                                .setString("course", to_alumni_users.course)
+                                .setString("major", to_alumni_users.major)
+                                .setString("image", to_alumni_users.image)
+                                .ok();
 
-                PreparedStatement stmt = conn.prepareStatement(s0);
-                stmt.execute();
+                        stmt.addBatch(s0);
+                    }
+
+                }
+            } else {
+                for (to_alumni_users to_alumni_users : to_alumni_users1) {
+                    String s0 = "insert into alumni_users("
+                            + "id"
+                            + ",first_name"
+                            + ",approved"
+                            + ",role_id"
+                            + ",email"
+                            + ",suffix_name"
+                            + ",middle_name"
+                            + ",activated"
+                            + ",last_name"
+                            + ",role"
+                            + ",active"
+                            + ",civil_status"
+                            + ",gender"
+                            + ",date_of_birth"
+                            + ",blood_type"
+                            + ",home_address"
+                            + ",level"
+                            + ",year"
+                            + ",course"
+                            + ",major"
+                            + ",image"
+                            + ")values("
+                            + ":id"
+                            + ",:first_name"
+                            + ",:approved"
+                            + ",:role_id"
+                            + ",:email"
+                            + ",:suffix_name"
+                            + ",:middle_name"
+                            + ",:activated"
+                            + ",:last_name"
+                            + ",:role"
+                            + ",:active"
+                            + ",:civil_status"
+                            + ",:gender"
+                            + ",:date_of_birth"
+                            + ",:blood_type"
+                            + ",:home_address"
+                            + ",:level"
+                            + ",:year"
+                            + ",:course"
+                            + ",:major"
+                            + ",:image"
+                            + ")";
+
+                    s0 = SqlStringUtil.parse(s0)
+                            .setNumber("id", to_alumni_users.id)
+                            .setString("first_name", to_alumni_users.first_name)
+                            .setNumber("approved", to_alumni_users.approved)
+                            .setNumber("role_id", to_alumni_users.role_id)
+                            .setString("email", to_alumni_users.email)
+                            .setString("suffix_name", to_alumni_users.suffix_name)
+                            .setString("middle_name", to_alumni_users.middle_name)
+                            .setNumber("activated", to_alumni_users.activated)
+                            .setString("last_name", to_alumni_users.last_name)
+                            .setString("role", to_alumni_users.role)
+                            .setNumber("active", to_alumni_users.active)
+                            .setString("civil_status", to_alumni_users.civil_status)
+                            .setString("gender", to_alumni_users.gender)
+                            .setString("date_of_birth", to_alumni_users.date_of_birth)
+                            .setString("blood_type", to_alumni_users.blood_type)
+                            .setString("home_address", to_alumni_users.home_address)
+                            .setString("level", to_alumni_users.level)
+                            .setString("year", to_alumni_users.year)
+                            .setString("course", to_alumni_users.course)
+                            .setString("major", to_alumni_users.major)
+                            .setString("image", to_alumni_users.image)
+                            .ok();
+
+                    stmt.addBatch(s0);
+                }
             }
 
+            stmt.executeBatch();
+            conn.commit();
             Lg.s(Alumni_users.class, "Successfully Added");
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -18,3 +18,4 @@ alter table alumni_users add year varchar(255) default '';
 alter table alumni_users add course varchar(255) default '';
 alter table alumni_users add major varchar(255) default '';
 alter table alumni_users add image varchar(255) default '';
+
