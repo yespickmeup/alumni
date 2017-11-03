@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" printOrder="Horizontal" pageWidth="242" pageHeight="153" orientation="Landscape" columnWidth="242" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2fce21b8-3770-4cc1-967f-12ea3de5653d">
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="141"/>
-	<parameter name="background_path" class="java.lang.String"/>
-	<parameter name="photo_path" class="java.lang.String"/>
-	<parameter name="id_no" class="java.lang.String"/>
-	<parameter name="name" class="java.lang.String"/>
-	<parameter name="signature_path" class="java.lang.String"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="153" splitType="Stretch">
-			<image scaleImage="FillFrame">
-				<reportElement uuid="e078623a-5880-4d79-a351-7da892622906" x="0" y="0" width="242" height="147"/>
-				<imageExpression><![CDATA[$P{background_path}]]></imageExpression>
-			</image>
-			<image scaleImage="FillFrame">
-				<reportElement uuid="e4b73ada-f350-4ff2-b68c-fa21c7815314" x="7" y="76" width="56" height="53"/>
-				<imageExpression><![CDATA[$P{photo_path}]]></imageExpression>
-			</image>
-			<textField>
-				<reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="66" y="101" width="132" height="13"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="10" isBold="true"/>
-					<paragraph leftIndent="2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{id_no}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="66" y="118" width="172" height="25"/>
-				<textElement verticalAlignment="Top">
-					<font fontName="Arial" size="11" isBold="true"/>
-					<paragraph leftIndent="2"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
-			</textField>
-		</band>
-	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band splitType="Stretch"/>
-	</detail>
-	<columnFooter>
-		<band splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band splitType="Stretch"/>
-	</summary>
+    <property name="ireport.zoom" value="3.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <parameter name="background_path" class="java.lang.String"/>
+    <parameter name="photo_path" class="java.lang.String"/>
+    <parameter name="id_no" class="java.lang.String"/>
+    <parameter name="name" class="java.lang.String"/>
+    <parameter name="signature_path" class="java.lang.String"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="153" splitType="Stretch">
+            <image scaleImage="FillFrame">
+                <reportElement uuid="e078623a-5880-4d79-a351-7da892622906" x="0" y="0" width="242" height="147"/>
+                <imageExpression><![CDATA[$P{background_path}]]></imageExpression>
+            </image>
+            <image scaleImage="FillFrame">
+                <reportElement uuid="e4b73ada-f350-4ff2-b68c-fa21c7815314" x="7" y="76" width="56" height="53"/>
+                <imageExpression><![CDATA[$P{photo_path}]]></imageExpression>
+            </image>
+            <textField>
+                <reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="66" y="101" width="132" height="13"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Arial" size="10" isBold="true"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{id_no}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="65ebd1d1-8142-4fc6-9c8d-8f7959f65427" x="66" y="118" width="172" height="25"/>
+                <textElement verticalAlignment="Top">
+                    <font fontName="Arial" size="11" isBold="true"/>
+                    <paragraph leftIndent="2"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <pageHeader>
+        <band splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band splitType="Stretch"/>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
 </jasperReport>
